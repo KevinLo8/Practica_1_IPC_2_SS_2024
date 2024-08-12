@@ -36,11 +36,11 @@ public class Frame_principal extends JFrame {
         jMenuBar.add(jM1);
         jMenuBar.add(jM2);
 
-        itemA1 = new JMenuItem("Solicitud nueva");
-        itemA2 = new JMenuItem("Solicitud nueva");
-        itemA3 = new JMenuItem("Solicitud nueva");
-        itemA4 = new JMenuItem("Solicitud nueva");
-        itemA5 = new JMenuItem("Solicitud nueva");
+        itemA1 = new JMenuItem("Solicitud Nueva");
+        itemA2 = new JMenuItem("Insertar Movimiento");
+        itemA3 = new JMenuItem("Consultar Tarjeta");
+        itemA4 = new JMenuItem("Autorizar Tarjeta");
+        itemA5 = new JMenuItem("Cancelar Tarjeta");
         itemA6 = new JMenuItem("Salir");
 
         itemA6.addActionListener(new ActionListener() {
