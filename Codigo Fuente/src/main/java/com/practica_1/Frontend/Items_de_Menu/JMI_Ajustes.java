@@ -22,9 +22,6 @@ public class JMI_Ajustes extends JMenuItem {
         this.frame = frame;
 
         config = new Configuraciones();
-        config.setArchivoEntrada(frame.getConfig().getArchivoEntrada());
-        config.setDirecciónSalida(frame.getConfig().getDirecciónSalida());
-        config.setVelocidadProcesamiento(frame.getConfig().getVelocidadProcesamiento());
 
         addActionListener(new ActionListener() {
 
@@ -40,6 +37,10 @@ public class JMI_Ajustes extends JMenuItem {
     }  
     
     private void btnAjustesActionPerformer(){
+
+        config.setArchivoEntrada(frame.getConfig().getArchivoEntrada());
+        config.setDirecciónSalida(frame.getConfig().getDirecciónSalida());
+        config.setVelocidadProcesamiento(frame.getConfig().getVelocidadProcesamiento());
 
         JInternalFrame iFrame = new JInternalFrame("Ajustes", false, true, false, false);
 
