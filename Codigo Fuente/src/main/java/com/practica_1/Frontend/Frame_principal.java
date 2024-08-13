@@ -2,6 +2,7 @@ package com.practica_1.Frontend;
 
 import javax.swing.*;
 
+import com.practica_1.Backend.Configuraciones.Configuraciones;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Ajustes;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Salir;
 
@@ -9,18 +10,23 @@ import java.awt.*;
 
 public class Frame_principal extends JFrame {
 
-    //Secrea una constante con la dimension del la pantalla
+    //Se crea una constante con la dimension del la pantalla
     private static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     private int size = 600;
-    private JMenuBar jMenuBar;
-    private JMenu jM1, jM2, jM3;
-    private JMenuItem itemAc1, itemAc2, itemAc3, itemAc4, itemAc5;
-    private JMenuItem itemR1, itemR2, itemR3;
+
+    //Se crea el panel de escritorio
+    private JDesktopPane desktop;
+
+    //Se crea una clase donde se guardaran las configuraciones
+    private Configuraciones config;
 
     /**
      * Se crea el constructor del frame
      */
     public Frame_principal(){
+
+        config = new Configuraciones();
+
         initComponentes();
     }
 
@@ -33,10 +39,14 @@ public class Frame_principal extends JFrame {
         setBounds(((int)dim.getWidth() - size) / 2, ((int)dim.getHeight() - size) / 2, size, size);
         setTitle("Registro de Trajetas");
 
-        jMenuBar = new JMenuBar();
-        jM1 = new JMenu("Archivo");
-        jM2 = new JMenu("Acciones");
-        jM3 = new JMenu("Reportes");
+        desktop = new JDesktopPane();
+        add(desktop, BorderLayout.CENTER);
+
+
+        JMenuBar jMenuBar = new JMenuBar();
+        JMenu jM1 = new JMenu("Archivo");
+        JMenu jM2 = new JMenu("Acciones");
+        JMenu jM3 = new JMenu("Reportes");
 
         jMenuBar.add(jM1);
         jMenuBar.add(jM2);
@@ -45,15 +55,15 @@ public class Frame_principal extends JFrame {
         JMI_Ajustes itemA1 = new JMI_Ajustes(this);
         JMI_Salir itemA2 = new JMI_Salir();
 
-        itemAc1 = new JMenuItem("Solicitud Nueva");
-        itemAc2 = new JMenuItem("Insertar Movimiento");
-        itemAc3 = new JMenuItem("Consultar Tarjeta");
-        itemAc4 = new JMenuItem("Autorizar Tarjeta");
-        itemAc5 = new JMenuItem("Cancelar Tarjeta");
+        JMenuItem itemAc1 = new JMenuItem("Solicitud Nueva");
+        JMenuItem itemAc2 = new JMenuItem("Insertar Movimiento");
+        JMenuItem itemAc3 = new JMenuItem("Consultar Tarjeta");
+        JMenuItem itemAc4 = new JMenuItem("Autorizar Tarjeta");
+        JMenuItem itemAc5 = new JMenuItem("Cancelar Tarjeta");
 
-        itemR1 = new JMenuItem("Solicitud Nueva");
-        itemR2 = new JMenuItem("Insertar Movimiento");
-        itemR3 = new JMenuItem("Consultar Tarjeta");
+        JMenuItem itemR1 = new JMenuItem("Solicitud Nueva");
+        JMenuItem itemR2 = new JMenuItem("Insertar Movimiento");
+        JMenuItem itemR3 = new JMenuItem("Consultar Tarjeta");
 
 
         jM1.add(itemA1);
@@ -71,6 +81,14 @@ public class Frame_principal extends JFrame {
 
         setJMenuBar(jMenuBar);
 
+    }
+
+    public JDesktopPane getDesktop() {
+        return desktop;
+    }
+
+    public Configuraciones getConfig() {
+        return config;
     }
 
 }
