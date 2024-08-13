@@ -1,22 +1,32 @@
 package com.practica_1.Frontend;
 
 import javax.swing.*;
+
+import com.practica_1.Backend.Configuraciones.Configuraciones;
+import com.practica_1.Frontend.Items_de_Menu.JMI_Ajustes;
+import com.practica_1.Frontend.Items_de_Menu.JMI_Salir;
+
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Frame_principal extends JFrame {
 
-    //Secrea una constante con la dimension del la pantalla
+    //Se crea una constante con la dimension del la pantalla
     private static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-    private JMenuBar jMenuBar;
-    private JMenu jM1, jM2;
-    private JMenuItem itemA1, itemA2, itemA3, itemA4, itemA5, itemA6;
+    private int size = 600;
+
+    //Se crea el panel de escritorio
+    private JDesktopPane desktop;
+
+    //Se crea una clase donde se guardaran las configuraciones
+    private Configuraciones config;
 
     /**
      * Se crea el constructor del frame
      */
     public Frame_principal(){
+
+        config = new Configuraciones();
+
         initComponentes();
     }
 
@@ -26,41 +36,59 @@ public class Frame_principal extends JFrame {
     private void initComponentes(){
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(((int)dim.getWidth() - 500) / 2, ((int)dim.getHeight() - 500) / 2, 500, 500);
+        setBounds(((int)dim.getWidth() - size) / 2, ((int)dim.getHeight() - size) / 2, size, size);
         setTitle("Registro de Trajetas");
 
-        jMenuBar = new JMenuBar();
-        jM1 = new JMenu("Archivo");
-        jM2 = new JMenu("Reportes");
+        desktop = new JDesktopPane();
+        add(desktop, BorderLayout.CENTER);
+
+
+        JMenuBar jMenuBar = new JMenuBar();
+        JMenu jM1 = new JMenu("Archivo");
+        JMenu jM2 = new JMenu("Acciones");
+        JMenu jM3 = new JMenu("Reportes");
 
         jMenuBar.add(jM1);
         jMenuBar.add(jM2);
+        jMenuBar.add(jM3);
 
-        itemA1 = new JMenuItem("Solicitud Nueva");
-        itemA2 = new JMenuItem("Insertar Movimiento");
-        itemA3 = new JMenuItem("Consultar Tarjeta");
-        itemA4 = new JMenuItem("Autorizar Tarjeta");
-        itemA5 = new JMenuItem("Cancelar Tarjeta");
-        itemA6 = new JMenuItem("Salir");
+        JMI_Ajustes itemA1 = new JMI_Ajustes(this);
+        JMI_Salir itemA2 = new JMI_Salir();
 
-        itemA6.addActionListener(new ActionListener() {
+        JMenuItem itemAc1 = new JMenuItem("Solicitud Nueva");
+        JMenuItem itemAc2 = new JMenuItem("Insertar Movimiento");
+        JMenuItem itemAc3 = new JMenuItem("Consultar Tarjeta");
+        JMenuItem itemAc4 = new JMenuItem("Autorizar Tarjeta");
+        JMenuItem itemAc5 = new JMenuItem("Cancelar Tarjeta");
 
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-            
-        });
+        JMenuItem itemR1 = new JMenuItem("Solicitud Nueva");
+        JMenuItem itemR2 = new JMenuItem("Insertar Movimiento");
+        JMenuItem itemR3 = new JMenuItem("Consultar Tarjeta");
+
 
         jM1.add(itemA1);
         jM1.add(itemA2);
-        jM1.add(itemA3);
-        jM1.add(itemA4);
-        jM1.add(itemA5);
-        jM1.add(itemA6);
+
+        jM2.add(itemAc1);
+        jM2.add(itemAc2);
+        jM2.add(itemAc3);
+        jM2.add(itemAc4);
+        jM2.add(itemAc5);
+
+        jM3.add(itemR1);
+        jM3.add(itemR2);
+        jM3.add(itemR3);
 
         setJMenuBar(jMenuBar);
 
+    }
+
+    public JDesktopPane getDesktop() {
+        return desktop;
+    }
+
+    public Configuraciones getConfig() {
+        return config;
     }
 
 }
