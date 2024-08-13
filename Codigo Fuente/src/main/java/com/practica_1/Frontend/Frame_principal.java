@@ -1,16 +1,19 @@
 package com.practica_1.Frontend;
 
 import javax.swing.*;
+
+import com.practica_1.Backend.Listeners.JMI_Ajustes;
+import com.practica_1.Backend.Listeners.JMI_Salir;
+
 import java.awt.*;
-import java.awt.event.*;
 
 public class Frame_principal extends JFrame {
 
     //Secrea una constante con la dimension del la pantalla
     private static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    private int size = 600;
     private JMenuBar jMenuBar;
     private JMenu jM1, jM2, jM3;
-    private JMenuItem itemA1, itemA2;
     private JMenuItem itemAc1, itemAc2, itemAc3, itemAc4, itemAc5;
     private JMenuItem itemR1, itemR2, itemR3;
 
@@ -27,7 +30,7 @@ public class Frame_principal extends JFrame {
     private void initComponentes(){
 
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setBounds(((int)dim.getWidth() - 500) / 2, ((int)dim.getHeight() - 500) / 2, 500, 500);
+        setBounds(((int)dim.getWidth() - size) / 2, ((int)dim.getHeight() - size) / 2, size, size);
         setTitle("Registro de Trajetas");
 
         jMenuBar = new JMenuBar();
@@ -39,8 +42,8 @@ public class Frame_principal extends JFrame {
         jMenuBar.add(jM2);
         jMenuBar.add(jM3);
 
-        itemA1 = new JMenuItem("Salir");
-        itemA2 = new JMenuItem("Salir");
+        JMI_Ajustes itemA1 = new JMI_Ajustes(this);
+        JMI_Salir itemA2 = new JMI_Salir();
 
         itemAc1 = new JMenuItem("Solicitud Nueva");
         itemAc2 = new JMenuItem("Insertar Movimiento");
@@ -52,14 +55,6 @@ public class Frame_principal extends JFrame {
         itemR2 = new JMenuItem("Insertar Movimiento");
         itemR3 = new JMenuItem("Consultar Tarjeta");
 
-        itemA2.addActionListener(new ActionListener() {
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.exit(0);
-            }
-            
-        });
 
         jM1.add(itemA1);
         jM1.add(itemA2);
