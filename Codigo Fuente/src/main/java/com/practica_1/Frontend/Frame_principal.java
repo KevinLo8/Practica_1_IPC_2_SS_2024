@@ -2,8 +2,8 @@ package com.practica_1.Frontend;
 
 import javax.swing.*;
 
-import com.practica_1.Backend.Listeners.JMI_Ajustes;
-import com.practica_1.Backend.Listeners.JMI_Salir;
+import com.practica_1.Frontend.Items_de_Menu.JMI_Ajustes;
+import com.practica_1.Frontend.Items_de_Menu.JMI_Salir;
 
 import java.awt.*;
 
