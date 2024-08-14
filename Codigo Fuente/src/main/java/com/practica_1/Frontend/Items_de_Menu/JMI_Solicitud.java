@@ -7,12 +7,10 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
-import com.practica_1.Backend.Configuraciones.Configuraciones;
 import com.practica_1.Frontend.Frame_principal;
 
 public class JMI_Solicitud extends JMenuItem {
 
-    private Configuraciones config;
     private Frame_principal frame;
     private JTextField txf1, txf2, txf3, txf4;
     private JLabel lbl1, lbl2, lbl3, lbl4;
@@ -22,8 +20,6 @@ public class JMI_Solicitud extends JMenuItem {
         super("Solicitud Nueva");
 
         this.frame = frame;
-
-        config = new Configuraciones();
 
         addActionListener(new ActionListener() {
 
@@ -40,18 +36,18 @@ public class JMI_Solicitud extends JMenuItem {
 
     private void btnSolicitudActionPerformer(){
 
-        config.setArchivoEntrada(frame.getConfig().getArchivoEntrada());
-        config.setDirecciónSalida(frame.getConfig().getDirecciónSalida());
-        config.setVelocidadProcesamiento(frame.getConfig().getVelocidadProcesamiento());
-
+        //Se inicia el InternalFrame
         JInternalFrame iFrame = new JInternalFrame("Solicitud nueva", false, true, false, false);
 
+        //Se configura el InternalFrame
         iFrame.setVisible(true);
         iFrame.setBounds((frame.getDesktop().getWidth() - 400) / 2, (frame.getDesktop().getHeight() - 450) / 2, 400, 450);
         iFrame.setLayout(new GridLayout(5, 1, 0, 5));
 
+        //Se agrega el InternalFrane al Desktop
         frame.getDesktop().add(iFrame);
 
+        //Se inician los componentes del InternalFrame
         JPanel pnl1 = new JPanel();
         JPanel pnl2 = new JPanel();
         JPanel pnl3 = new JPanel();
@@ -79,12 +75,14 @@ public class JMI_Solicitud extends JMenuItem {
         txf4 = new JTextField();
         txf4.setPreferredSize(new Dimension(300, 25));
 
+        //Se agregan los componentes al InternalFrame
         iFrame.add(pnl1);
         iFrame.add(pnl2);
         iFrame.add(pnl3);
         iFrame.add(pnl4);
         iFrame.add(pnl5);
 
+        //Se agregan los componentes en sus respectivos espacios
         pnl1.add(lblf1, BorderLayout.NORTH);
         pnl1.add(txf1);
         pnl1.add(lbl1, BorderLayout.SOUTH);
@@ -103,6 +101,7 @@ public class JMI_Solicitud extends JMenuItem {
 
         pnl5.add(btn1);
 
+        //Se agregan los listeners a los componentes que lo requieren
         btn1.addActionListener(new ActionListener() {
 
             @Override
@@ -111,7 +110,6 @@ public class JMI_Solicitud extends JMenuItem {
             }
             
         });
-
         txf1.addFocusListener(new FocusListener() {
 
             @Override
@@ -136,7 +134,6 @@ public class JMI_Solicitud extends JMenuItem {
             }
             
         });
-
         txf3.addFocusListener(new FocusListener() {
 
             @Override
@@ -162,7 +159,6 @@ public class JMI_Solicitud extends JMenuItem {
             }
             
         });
-
         txf4.addFocusListener(new FocusListener() {
 
             @Override
