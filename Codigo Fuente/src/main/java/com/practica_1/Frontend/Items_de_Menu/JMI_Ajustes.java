@@ -36,14 +36,20 @@ public class JMI_Ajustes extends JMenuItem {
 
     }  
     
+    /**
+     * Contiene todo lo que ejecuta al pulsar el boton de ajustes
+     */
     private void btnAjustesActionPerformer(){
-
+ 
+        //Se copian los datos de configuración
         config.setArchivoEntrada(frame.getConfig().getArchivoEntrada());
         config.setDirecciónSalida(frame.getConfig().getDirecciónSalida());
         config.setVelocidadProcesamiento(frame.getConfig().getVelocidadProcesamiento());
 
+        //Se inicia el InternalFrame
         JInternalFrame iFrame = new JInternalFrame("Ajustes", false, true, false, false);
 
+        //Se inician los componentes del InternalFrame
         JPanel pnl1 = new JPanel(new FlowLayout());
         JPanel pnl2 = new JPanel();
         JPanel pnl3 = new JPanel(new FlowLayout());
@@ -70,17 +76,21 @@ public class JMI_Ajustes extends JMenuItem {
         JButton btn2 = new JButton("Seleccionar");
         JButton btn3 = new JButton("Guardar");
 
+        //Se configura el InternalFrame
         iFrame.setVisible(true);
         iFrame.setBounds((frame.getDesktop().getWidth() - 400) / 2, (frame.getDesktop().getHeight() - 400) / 2, 400, 400);
         iFrame.setLayout(new GridLayout(4, 1, 0, 5));
 
+        //Se agrega el InternalFrane al Desktop
         frame.getDesktop().add(iFrame);
            
+        //Se agregan los componentes al InternalFrame
         iFrame.add(pnl1);
         iFrame.add(pnl2);
         iFrame.add(pnl3);
         iFrame.add(pnl4);
         
+        //Se agregan los componentes en sus respectivos espacios
         pnl1.add(lbl1,BorderLayout.NORTH);
         pnl1.add(txf1);
         pnl1.add(btn1);
@@ -97,6 +107,7 @@ public class JMI_Ajustes extends JMenuItem {
 
         pnl4.add(btn3);
 
+        //Se agregan los listeners a los componentes que lo requieren
         btn1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 btnSelecionarActionPerformer(1);
@@ -127,16 +138,28 @@ public class JMI_Ajustes extends JMenuItem {
 
     }
 
+    /**
+     * @param i
+     * Contiene todo lo que se ejecuta al pulsar en el boton de seleccionar
+     */
     private void btnSelecionarActionPerformer(int i){
+
+        //Se inicializa el file chooser
         JFileChooser fileChooser;
         fileChooser = new JFileChooser();
+
+        //Se configura el file chooser dependiendo de lo que valla a hacer
         if (i == 1) {
             fileChooser.setDialogTitle("Seleccione el archivo de entrada");
         } else {
             fileChooser.setDialogTitle("Seleccione la carpeta de salida");
             fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         }
+
+        //Se hace visible el file chooser
         fileChooser.showOpenDialog(frame);
+
+        //Se guarda la direccion seleccionada en su respectivo espacio
         try {
             if (i == 1) {
                 lbl4.setText(" ");
@@ -152,6 +175,9 @@ public class JMI_Ajustes extends JMenuItem {
         }
     }
 
+    /**
+     * Contiene todo lo que se ejecuta al pulsar en el boton de guardar
+     */
     private void btnGuardarActionPerformer(){
 
         //Se intenta guardar el archivo de entrada
