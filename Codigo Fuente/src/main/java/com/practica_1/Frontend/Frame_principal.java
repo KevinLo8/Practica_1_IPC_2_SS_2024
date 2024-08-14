@@ -5,6 +5,7 @@ import javax.swing.*;
 import com.practica_1.Backend.Configuraciones.Configuraciones;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Ajustes;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Salir;
+import com.practica_1.Frontend.Items_de_Menu.JMI_Solicitud;
 
 import java.awt.*;
 
@@ -35,14 +36,16 @@ public class Frame_principal extends JFrame {
      */
     private void initComponentes(){
 
+        //Se configura el frame
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setBounds(((int)dim.getWidth() - size) / 2, ((int)dim.getHeight() - size) / 2, size, size);
         setTitle("Registro de Trajetas");
 
+        //Se inicia el DesktopPane
         desktop = new JDesktopPane();
         add(desktop, BorderLayout.CENTER);
 
-
+        //se inicializa la barra de menú y sus componentes
         JMenuBar jMenuBar = new JMenuBar();
         JMenu jM1 = new JMenu("Archivo");
         JMenu jM2 = new JMenu("Acciones");
@@ -55,7 +58,7 @@ public class Frame_principal extends JFrame {
         JMI_Ajustes itemA1 = new JMI_Ajustes(this);
         JMI_Salir itemA2 = new JMI_Salir();
 
-        JMenuItem itemAc1 = new JMenuItem("Solicitud Nueva");
+        JMI_Solicitud itemAc1 = new JMI_Solicitud(this);
         JMenuItem itemAc2 = new JMenuItem("Insertar Movimiento");
         JMenuItem itemAc3 = new JMenuItem("Consultar Tarjeta");
         JMenuItem itemAc4 = new JMenuItem("Autorizar Tarjeta");
@@ -65,7 +68,7 @@ public class Frame_principal extends JFrame {
         JMenuItem itemR2 = new JMenuItem("Insertar Movimiento");
         JMenuItem itemR3 = new JMenuItem("Consultar Tarjeta");
 
-
+        //Se arma la barra de menú
         jM1.add(itemA1);
         jM1.add(itemA2);
 
@@ -79,6 +82,7 @@ public class Frame_principal extends JFrame {
         jM3.add(itemR2);
         jM3.add(itemR3);
 
+        //Se agrega la barra de menú al frame
         setJMenuBar(jMenuBar);
 
     }
