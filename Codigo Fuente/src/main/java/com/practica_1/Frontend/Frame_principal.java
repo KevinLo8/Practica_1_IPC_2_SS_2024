@@ -2,6 +2,7 @@ package com.practica_1.Frontend;
 
 import javax.swing.*;
 
+import com.practica_1.Backend.ConeccionDB.ConexiónDB;
 import com.practica_1.Backend.Configuraciones.Configuraciones;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Ajustes;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Salir;
@@ -21,12 +22,19 @@ public class Frame_principal extends JFrame {
     //Se crea una clase donde se guardaran las configuraciones
     private Configuraciones config;
 
+    //Se conecta crea la coneccion con la DB
+    private ConexiónDB conexion;
+
     /**
      * Se crea el constructor del frame
      */
     public Frame_principal(){
 
+        //Se declara las configuraciones
         config = new Configuraciones();
+
+        //Se declara la DB
+        conexion = new ConexiónDB();
 
         initComponentes();
     }
@@ -45,7 +53,7 @@ public class Frame_principal extends JFrame {
         desktop = new JDesktopPane();
         add(desktop, BorderLayout.CENTER);
 
-        //se inicializa la barra de menú y sus componentes
+        //Se inicializa la barra de menú y sus componentes
         JMenuBar jMenuBar = new JMenuBar();
         JMenu jM1 = new JMenu("Archivo");
         JMenu jM2 = new JMenu("Acciones");
@@ -87,12 +95,17 @@ public class Frame_principal extends JFrame {
 
     }
 
+    //Se declaran los getters necesarios
     public JDesktopPane getDesktop() {
         return desktop;
     }
 
     public Configuraciones getConfig() {
         return config;
+    }
+
+    public ConexiónDB getConexion() {
+        return conexion;
     }
 
 }
