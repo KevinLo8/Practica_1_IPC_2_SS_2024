@@ -148,8 +148,7 @@ public class JMI_Solicitud extends JMenuItem {
                 try {
 
                     Float numero = Float.parseFloat(txf3.getText());
-                    DecimalFormat df = new DecimalFormat("0,00");
-                    df.setMaximumFractionDigits(2);
+                    DecimalFormat df = new DecimalFormat("0.00");
                     txf3.setText(df.format(numero));
     
                 } catch (NumberFormatException ex) {
