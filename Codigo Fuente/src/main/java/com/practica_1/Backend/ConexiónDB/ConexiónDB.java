@@ -1,4 +1,4 @@
-package com.practica_1.Backend.ConeccionDB;
+package com.practica_1.Backend.ConexiónDB;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
