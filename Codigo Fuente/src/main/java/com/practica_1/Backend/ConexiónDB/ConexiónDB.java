@@ -25,26 +25,37 @@ public class ConexiónDB {
 
     public void guardarSolicitud(Data_Solicitud data){
 
-        //int cantidadSolicitudes
+        int cantidadSolicitudes = 0
 
         try {
             String select = "SELECT * FROM solicitud";
             Statement statementInsert = connection.createStatement();
             ResultSet resultSet = statementInsert.executeQuery(select);
 
+            resultSet.last();
+
+            cantidadSolicitudes = resultSet.getInt("numero");
 
         } catch (SQLException e) {
-            System.out.println("Error al consultar a la DB");
             e.printStackTrace();
         }
 
-
-
+        cantidadSolicitudes++;
 
         String insert = "INSERT INTO solicitud (numero, fecha, tipo, nombre, salario, direccion) "
-                + "values('" + "//numero" + "','" + data.getFecha() + "','" 
+                + "values('" + cantidadSolicitudes + "','" + data.getFecha() + "','" 
                 + data.getTipo() + "','" + data.getNombre() + "','" 
                 + data.getSalario() + "','" + data.getDireccion() + "')";
 
+        try {
+
+            Statement statementInsert = connection.createStatement();
+            int rowsAffected = statementInsert.executeUpdate(insert);
+            System.out.println("Rows affected> " + rowsAffected);
+        } catch (SQLException e) {
+            System.out.println("Error al insertar a la DB");
+            e.printStackTrace();
+        }
+        
     }
 }
