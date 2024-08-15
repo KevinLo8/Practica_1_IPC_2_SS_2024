@@ -1,5 +1,6 @@
 package com.practica_1.Frontend.Items_de_Menu;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.awt.*;
@@ -209,6 +210,8 @@ public class JMI_Solicitud extends JMenuItem {
         }
 
         if (completo == 4) {
+            Date fecha = new Date();
+            //DateFormat formato = 
             //se crea la solicitud
         }
     }
