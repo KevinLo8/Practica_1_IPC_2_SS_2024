@@ -25,5 +25,26 @@ public class ConexiónDB {
 
     public void guardarSolicitud(Data_Solicitud data){
 
+        //int cantidadSolicitudes
+
+        try {
+            String select = "SELECT * FROM solicitud";
+            Statement statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(select);
+
+
+        } catch (SQLException e) {
+            System.out.println("Error al consultar a la DB");
+            e.printStackTrace();
+        }
+
+
+
+
+        String insert = "INSERT INTO solicitud (numero, fecha, tipo, nombre, salario, direccion) "
+                + "values('" + "//numero" + "','" + data.getFecha() + "','" 
+                + data.getTipo() + "','" + data.getNombre() + "','" 
+                + data.getSalario() + "','" + data.getDireccion() + "')";
+
     }
 }
