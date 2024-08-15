@@ -1,7 +1,5 @@
 package com.practica_1.Backend.Datos;
 
-import com.mysql.cj.x.protobuf.MysqlxDatatypes.Scalar.String;
-
 public class Data_Solicitud {
 
     private String nombre;
