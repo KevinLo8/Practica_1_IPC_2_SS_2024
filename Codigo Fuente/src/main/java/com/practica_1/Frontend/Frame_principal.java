@@ -2,7 +2,7 @@ package com.practica_1.Frontend;
 
 import javax.swing.*;
 
-import com.practica_1.Backend.ConeccionDB.ConexiónDB;
+import com.practica_1.Backend.ConexiónDB.ConexiónDB;
 import com.practica_1.Backend.Configuraciones.Configuraciones;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Ajustes;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Salir;
