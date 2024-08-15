@@ -7,6 +7,7 @@ import java.awt.event.*;
 
 import javax.swing.*;
 
+import com.practica_1.Backend.Datos.Data_Solicitud;
 import com.practica_1.Frontend.Frame_principal;
 
 public class JMI_Solicitud extends JMenuItem {
@@ -175,27 +176,33 @@ public class JMI_Solicitud extends JMenuItem {
     }
 
     private void btnCrearActionPerformer(){
+
+        Data_Solicitud data = new Data_Solicitud();
         int completo = 0;
 
         if (txf1.getText().length() < 100 && !txf1.getText().isEmpty()) {
+            data.setNombre(txf1.getText());
             completo++;
         } else {
             lbl1.setText("Ingrese un nombre valido");
         }
         
         if (txf2.getText().length() < 150 && !txf2.getText().isEmpty()) {
+            data.setDireccion(txf2.getText());
             completo++;
         } else {
             lbl2.setText("Ingrese una dirección valida");
         }
 
         if (Float.parseFloat(txf3.getText()) > 0) {
+            data.setSalario(txf3.getText());
             completo++;
         } else {
             lbl3.setText("Ingrese un numero mayor a 0");
         }
 
         if (txf4.getText() == "NACIONAL" || txf4.getText() == "REGIONAL" || txf4.getText() == "INTERNACIONAL") {
+            data.setTipo(txf4.getText());
             completo++;
         } else {
             lbl4.setText("Ingrese un tipo de tarjeta valido");

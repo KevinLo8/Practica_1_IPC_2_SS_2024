@@ -1,6 +1,6 @@
-package com.practica_1.Backend.Configuraciones;
+package com.practica_1.Backend.Datos;
 
-public class Configuraciones {
+public class Data_Config {
     
     private String archivoEntrada;
     private int velocidadProcesamiento;

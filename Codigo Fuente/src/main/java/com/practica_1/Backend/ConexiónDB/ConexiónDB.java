@@ -1,8 +1,8 @@
 package com.practica_1.Backend.ConexiónDB;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
+
+import com.practica_1.Backend.Datos.Data_Solicitud;
 
 public class ConexiónDB {
 
@@ -23,4 +23,7 @@ public class ConexiónDB {
         }
     }
 
+    public void guardarSolicitud(Data_Solicitud data){
+
+    }
 }

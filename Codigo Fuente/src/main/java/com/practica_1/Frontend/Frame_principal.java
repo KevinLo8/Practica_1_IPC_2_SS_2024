@@ -3,7 +3,7 @@ package com.practica_1.Frontend;
 import javax.swing.*;
 
 import com.practica_1.Backend.ConexiónDB.ConexiónDB;
-import com.practica_1.Backend.Configuraciones.Configuraciones;
+import com.practica_1.Backend.Datos.Data_Config;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Ajustes;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Salir;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Solicitud;
@@ -20,7 +20,7 @@ public class Frame_principal extends JFrame {
     private JDesktopPane desktop;
 
     //Se crea una clase donde se guardaran las configuraciones
-    private Configuraciones config;
+    private Data_Config config;
 
     //Se conecta crea la coneccion con la DB
     private ConexiónDB conexion;
@@ -31,7 +31,7 @@ public class Frame_principal extends JFrame {
     public Frame_principal(){
 
         //Se declara las configuraciones
-        config = new Configuraciones();
+        config = new Data_Config();
 
         //Se declara la DB
         conexion = new ConexiónDB();
@@ -100,7 +100,7 @@ public class Frame_principal extends JFrame {
         return desktop;
     }
 
-    public Configuraciones getConfig() {
+    public Data_Config getConfig() {
         return config;
     }
 
