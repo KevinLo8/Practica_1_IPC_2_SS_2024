@@ -25,19 +25,19 @@ public class ConexiónDB {
 
     public void guardarSolicitud(Data_Solicitud data){
 
-        int cantidadSolicitudes = 0
+        int cantidadSolicitudes = 0;
 
         try {
             String select = "SELECT * FROM solicitud";
             Statement statementInsert = connection.createStatement();
             ResultSet resultSet = statementInsert.executeQuery(select);
 
-            resultSet.last();
-
-            cantidadSolicitudes = resultSet.getInt("numero");
+            while (resultSet.next()) {
+                cantidadSolicitudes = resultSet.getInt("numero");
+            }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+
         }
 
         cantidadSolicitudes++;

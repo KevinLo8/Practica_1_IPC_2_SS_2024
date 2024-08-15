@@ -1,7 +1,9 @@
 package com.practica_1.Frontend.Items_de_Menu;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
+import java.util.Locale;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -13,6 +15,7 @@ import com.practica_1.Frontend.Frame_principal;
 public class JMI_Solicitud extends JMenuItem {
 
     private Frame_principal frame;
+    private JInternalFrame iFrame;
     private JTextField txf1, txf2, txf3, txf4;
     private JLabel lbl1, lbl2, lbl3, lbl4;
     private JLabel lblf1, lblf2, lblf3, lblf4;
@@ -38,7 +41,7 @@ public class JMI_Solicitud extends JMenuItem {
     private void btnSolicitudActionPerformer(){
 
         //Se inicia el InternalFrame
-        JInternalFrame iFrame = new JInternalFrame("Solicitud nueva", false, true, false, false);
+        iFrame = new JInternalFrame("Solicitud nueva", false, true, false, false);
 
         //Se configura el InternalFrame
         iFrame.setVisible(true);
@@ -148,7 +151,9 @@ public class JMI_Solicitud extends JMenuItem {
                 try {
 
                     Float numero = Float.parseFloat(txf3.getText());
-                    DecimalFormat df = new DecimalFormat("0.00");
+                    DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.GERMAN);
+                    dfs.setDecimalSeparator('.');
+                    DecimalFormat df = new DecimalFormat("#.00",dfs);
                     txf3.setText(df.format(numero));
     
                 } catch (NumberFormatException ex) {
@@ -200,7 +205,7 @@ public class JMI_Solicitud extends JMenuItem {
             lbl3.setText("Ingrese un numero mayor a 0");
         }
 
-        if (txf4.getText() == "NACIONAL" || txf4.getText() == "REGIONAL" || txf4.getText() == "INTERNACIONAL") {
+        if (txf4.getText().equalsIgnoreCase("NACIONAL") || txf4.getText().equalsIgnoreCase("REGIONAL") || txf4.getText().equalsIgnoreCase("INTERNACIONAL")) {
             data.setTipo(txf4.getText());
             completo++;
         } else {
@@ -212,6 +217,8 @@ public class JMI_Solicitud extends JMenuItem {
             data.setFecha(fecha.toString());
 
             frame.getConexion().guardarSolicitud(data);
+
+            iFrame.dispose();
         }
     }
 
