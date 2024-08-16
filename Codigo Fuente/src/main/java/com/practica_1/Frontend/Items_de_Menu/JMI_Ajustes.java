@@ -6,14 +6,14 @@ import java.io.File;
 
 import javax.swing.*;
 
-import com.practica_1.Backend.Configuraciones.Configuraciones;
+import com.practica_1.Backend.Datos.Data_Config;
 import com.practica_1.Frontend.Frame_principal;
 
 public class JMI_Ajustes extends JMenuItem {
 
     private JTextField txf1, txf2, txf3;
     private JLabel lbl1, lbl2, lbl3, lbl4, lbl5, lbl6;
-    private Configuraciones config;
+    private Data_Config config;
     private Frame_principal frame;
     
     public JMI_Ajustes(Frame_principal frame) {
@@ -21,7 +21,7 @@ public class JMI_Ajustes extends JMenuItem {
 
         this.frame = frame;
 
-        config = new Configuraciones();
+        config = new Data_Config();
 
         addActionListener(new ActionListener() {
 

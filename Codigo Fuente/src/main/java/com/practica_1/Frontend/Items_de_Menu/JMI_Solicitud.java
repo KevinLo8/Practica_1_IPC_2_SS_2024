@@ -1,17 +1,21 @@
 package com.practica_1.Frontend.Items_de_Menu;
 
 import java.text.DecimalFormat;
-
+import java.text.DecimalFormatSymbols;
+import java.time.LocalDate;
+import java.util.Locale;
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
+import com.practica_1.Backend.Datos.Data_Solicitud;
 import com.practica_1.Frontend.Frame_principal;
 
 public class JMI_Solicitud extends JMenuItem {
 
     private Frame_principal frame;
+    private JInternalFrame iFrame;
     private JTextField txf1, txf2, txf3, txf4;
     private JLabel lbl1, lbl2, lbl3, lbl4;
     private JLabel lblf1, lblf2, lblf3, lblf4;
@@ -37,7 +41,7 @@ public class JMI_Solicitud extends JMenuItem {
     private void btnSolicitudActionPerformer(){
 
         //Se inicia el InternalFrame
-        JInternalFrame iFrame = new JInternalFrame("Solicitud nueva", false, true, false, false);
+        iFrame = new JInternalFrame("Solicitud nueva", false, true, false, false);
 
         //Se configura el InternalFrame
         iFrame.setVisible(true);
@@ -147,8 +151,9 @@ public class JMI_Solicitud extends JMenuItem {
                 try {
 
                     Float numero = Float.parseFloat(txf3.getText());
-                    DecimalFormat df = new DecimalFormat("0.00");
-                    df.setMaximumFractionDigits(2);
+                    DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.GERMAN);
+                    dfs.setDecimalSeparator('.');
+                    DecimalFormat df = new DecimalFormat("#.00",dfs);
                     txf3.setText(df.format(numero));
     
                 } catch (NumberFormatException ex) {
@@ -175,34 +180,45 @@ public class JMI_Solicitud extends JMenuItem {
     }
 
     private void btnCrearActionPerformer(){
+
+        Data_Solicitud data = new Data_Solicitud();
         int completo = 0;
 
         if (txf1.getText().length() < 100 && !txf1.getText().isEmpty()) {
+            data.setNombre(txf1.getText());
             completo++;
         } else {
             lbl1.setText("Ingrese un nombre valido");
         }
         
         if (txf2.getText().length() < 150 && !txf2.getText().isEmpty()) {
+            data.setDireccion(txf2.getText());
             completo++;
         } else {
             lbl2.setText("Ingrese una dirección valida");
         }
 
         if (Float.parseFloat(txf3.getText()) > 0) {
+            data.setSalario(txf3.getText());
             completo++;
         } else {
             lbl3.setText("Ingrese un numero mayor a 0");
         }
 
-        if (txf4.getText() == "NACIONAL" || txf4.getText() == "REGIONAL" || txf4.getText() == "INTERNACIONAL") {
+        if (txf4.getText().equalsIgnoreCase("NACIONAL") || txf4.getText().equalsIgnoreCase("REGIONAL") || txf4.getText().equalsIgnoreCase("INTERNACIONAL")) {
+            data.setTipo(txf4.getText());
             completo++;
         } else {
             lbl4.setText("Ingrese un tipo de tarjeta valido");
         }
 
         if (completo == 4) {
-            //se crea la solicitud
+            LocalDate fecha = LocalDate.now();
+            data.setFecha(fecha.toString());
+
+            frame.getConexion().guardarSolicitud(data);
+
+            iFrame.dispose();
         }
     }
 
