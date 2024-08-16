@@ -3,6 +3,7 @@ package com.practica_1.Backend.ConexiónDB;
 import java.sql.*;
 
 import com.practica_1.Backend.Datos.Data_Solicitud;
+import com.practica_1.Backend.Datos.Data_Tarjeta;
 
 public class ConexiónDB {
 
@@ -23,7 +24,7 @@ public class ConexiónDB {
         }
     }
 
-    public void guardarSolicitud(Data_Solicitud data){
+    public void guardarSolicitud(Data_Solicitud data) {
 
         int cantidadSolicitudes = 0;
 
@@ -58,4 +59,99 @@ public class ConexiónDB {
         }
         
     }
+
+    public Data_Solicitud pedirSolicitud(int numero) {
+
+        try {
+            String select = "SELECT * FROM solicitud where numero = " + numero;
+            Statement statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(select);
+
+            Data_Solicitud data_Solicitud = new Data_Solicitud();
+
+            if (resultSet.next()) {
+
+                data_Solicitud.setNombre(resultSet.getString("nombre"));
+                data_Solicitud.setDireccion(resultSet.getString("direccion"));
+                data_Solicitud.setSalario(resultSet.getFloat("salario"));
+                data_Solicitud.setTipo(resultSet.getString("tipo"));
+                data_Solicitud.setFecha(resultSet.getDate("fecha").toString());
+
+                return data_Solicitud;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            return null;
+        }
+    }
+
+    public void guardarTarjeta(Data_Tarjeta data) {
+
+        try {
+            String select = "SELECT * FROM tarjeta where tipo = " + data.getTipo();
+            Statement statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(select);
+
+            boolean coincidencia;
+            String numero;
+
+            do {
+
+                coincidencia = false;
+
+                numero = null;
+                switch (data.getTipo()) {
+                    case "NACIONAL":
+                        numero = "4256 3102 654";
+                        break;
+                    case "REGIONAL":
+                        numero = "4256 3102 656";
+                        break;
+                    case "INTERNACIONAL":
+                        numero = "4256 3102 658";
+                        break;
+                }
+
+                for (int i = 0; i < 5; i++) {
+                    int num = (int)Math.floor(Math.random() * 10);
+
+                    numero = numero + String.valueOf(num);
+                }
+
+                while (resultSet.next()) {
+
+                    if (resultSet.getString("numero").equals(numero)) {
+                        coincidencia = true;
+                    }
+                    
+                }    
+
+            } while (coincidencia);
+
+            data.setNumero(numero);
+
+        } catch (SQLException e) {
+            System.out.println("Error al insertar a la DB");
+        e.printStackTrace();
+        }
+
+        String insert = "INSERT INTO tarjeta (numero, tipo, limite, estado, numero_solicitud) "
+                + "values('" + data.getNumero() + "','" + data.getTipo().toString() + "','" 
+                + data.getLimite() + "','" + data.getEstado() + "','" 
+                + String.valueOf(data.getNumeroSolicitud()) + "')";
+
+        try {
+
+            Statement statementInsert = connection.createStatement();
+            int rowsAffected = statementInsert.executeUpdate(insert);
+            System.out.println("Rows affected> " + rowsAffected);
+        } catch (SQLException e) {
+            System.out.println("Error al insertar a la DB");
+            e.printStackTrace();
+        }
+
+    }
+
 }
