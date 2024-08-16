@@ -90,7 +90,7 @@ public class ConexiónDB {
         }
     }
 
-    public void guardarTarjeta(Data_Tarjeta data, JMI_Autorizacion jmi_Autorizacion) throws SolicitudAutorizadaException {
+    public void guardarTarjeta(Data_Tarjeta data) throws SolicitudAutorizadaException {
 
         try {
             String select = "SELECT * FROM tarjeta where tipo = '" + data.getTipo() + "';";

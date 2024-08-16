@@ -131,7 +131,7 @@ public class JMI_Autorizacion extends JMenuItem {
                         data.setLimite(minimo);
                         data.setEstado("Activada");
 
-                        frame.getConexion().guardarTarjeta(data, this);
+                        frame.getConexion().guardarTarjeta(data);
 
                         iFrame.dispose();
 
