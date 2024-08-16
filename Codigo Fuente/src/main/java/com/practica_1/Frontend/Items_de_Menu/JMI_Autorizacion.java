@@ -2,11 +2,13 @@ package com.practica_1.Frontend.Items_de_Menu;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 import javax.swing.*;
 
 import com.practica_1.Backend.Datos.Data_Solicitud;
 import com.practica_1.Backend.Datos.Data_Tarjeta;
+import com.practica_1.Backend.Exception.SolicitudAutorizadaException;
 import com.practica_1.Frontend.Frame_principal;
 
 public class JMI_Autorizacion extends JMenuItem {
@@ -59,7 +61,8 @@ public class JMI_Autorizacion extends JMenuItem {
         JButton btn1 = new JButton("Autorizar solicitud");
 
         txf1 = new JTextField();
-        txf1.setPreferredSize(new Dimension(100, 25));
+        txf1.setPreferredSize(new Dimension(200, 25));
+        txf1.setHorizontalAlignment(JTextField.CENTER);
 
         //Se agregan los componentes al InternalFrame
         iFrame.add(pnl1);
@@ -128,7 +131,7 @@ public class JMI_Autorizacion extends JMenuItem {
                         data.setLimite(minimo);
                         data.setEstado("Activada");
 
-                        frame.getConexion().guardarTarjeta(data);
+                        frame.getConexion().guardarTarjeta(data, this);
 
                         iFrame.dispose();
 
@@ -141,6 +144,8 @@ public class JMI_Autorizacion extends JMenuItem {
             }    
         } catch (NumberFormatException e) {
             lbl1.setText("Ingrese un numero de solicitud valido");
+        } catch (SolicitudAutorizadaException e) {
+            lbl1.setText("Solicitud selecionada ya esta autorizada");
         }
     }
 

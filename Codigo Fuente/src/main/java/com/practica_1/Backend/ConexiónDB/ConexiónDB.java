@@ -4,6 +4,8 @@ import java.sql.*;
 
 import com.practica_1.Backend.Datos.Data_Solicitud;
 import com.practica_1.Backend.Datos.Data_Tarjeta;
+import com.practica_1.Backend.Exception.SolicitudAutorizadaException;
+import com.practica_1.Frontend.Items_de_Menu.JMI_Autorizacion;
 
 public class ConexiónDB {
 
@@ -73,7 +75,8 @@ public class ConexiónDB {
 
                 data_Solicitud.setNombre(resultSet.getString("nombre"));
                 data_Solicitud.setDireccion(resultSet.getString("direccion"));
-                data_Solicitud.setSalario(resultSet.getFloat("salario"));
+                Float num = resultSet.getFloat("salario");
+                data_Solicitud.setSalario(num.toString());
                 data_Solicitud.setTipo(resultSet.getString("tipo"));
                 data_Solicitud.setFecha(resultSet.getDate("fecha").toString());
 
@@ -87,10 +90,10 @@ public class ConexiónDB {
         }
     }
 
-    public void guardarTarjeta(Data_Tarjeta data) {
+    public void guardarTarjeta(Data_Tarjeta data, JMI_Autorizacion jmi_Autorizacion) throws SolicitudAutorizadaException {
 
         try {
-            String select = "SELECT * FROM tarjeta where tipo = " + data.getTipo();
+            String select = "SELECT * FROM tarjeta where tipo = '" + data.getTipo() + "';";
             Statement statementInsert = connection.createStatement();
             ResultSet resultSet = statementInsert.executeQuery(select);
 
@@ -104,13 +107,13 @@ public class ConexiónDB {
                 numero = null;
                 switch (data.getTipo()) {
                     case "NACIONAL":
-                        numero = "4256 3102 654";
+                        numero = "42563102654";
                         break;
                     case "REGIONAL":
-                        numero = "4256 3102 656";
+                        numero = "42563102656";
                         break;
                     case "INTERNACIONAL":
-                        numero = "4256 3102 658";
+                        numero = "42563102658";
                         break;
                 }
 
@@ -147,6 +150,9 @@ public class ConexiónDB {
             Statement statementInsert = connection.createStatement();
             int rowsAffected = statementInsert.executeUpdate(insert);
             System.out.println("Rows affected> " + rowsAffected);
+
+        } catch (SQLIntegrityConstraintViolationException e) {
+            throw new SolicitudAutorizadaException();
         } catch (SQLException e) {
             System.out.println("Error al insertar a la DB");
             e.printStackTrace();
