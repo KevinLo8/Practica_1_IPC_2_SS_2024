@@ -212,7 +212,7 @@ public class Proceso_Movimiento {
 
     public void hacerVisible() {
 
-        if (iFrame.isVisible()) {
+        if (!iFrame.isClosed()) {
             iFrame.setVisible(true);
         }
 

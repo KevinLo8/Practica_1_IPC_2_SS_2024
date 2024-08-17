@@ -130,7 +130,7 @@ public class Proceso_Autorizacion {
 
     public void hacerVisible() {
 
-        if (iFrame.isVisible()) {
+        if (!iFrame.isClosed()) {
             iFrame.setVisible(true);
         }
 
