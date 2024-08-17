@@ -2,7 +2,6 @@ package com.practica_1.Frontend.Items_de_Menu;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLIntegrityConstraintViolationException;
 
 import javax.swing.*;
 
