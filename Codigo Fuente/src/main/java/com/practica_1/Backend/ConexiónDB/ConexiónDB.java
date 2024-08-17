@@ -2,6 +2,7 @@ package com.practica_1.Backend.ConexiónDB;
 
 import java.sql.*;
 
+import com.practica_1.Backend.Datos.Data_Movimiento;
 import com.practica_1.Backend.Datos.Data_Solicitud;
 import com.practica_1.Backend.Datos.Data_Tarjeta;
 import com.practica_1.Backend.Exception.SolicitudAutorizadaException;
@@ -15,7 +16,7 @@ public class ConexiónDB {
 
     private Connection connection;
 
-        public ConexiónDB(){
+    public ConexiónDB(){
         try {
             connection = DriverManager.getConnection(URL_MYSQL, USER, PASSWORD);
             connection.setSchema("CONTROL_BANCO");
@@ -28,30 +29,19 @@ public class ConexiónDB {
 
     public void guardarSolicitud(Data_Solicitud data) {
 
-        int cantidadSolicitudes = 0;
+        int numeroSolicitud = siguienteNumero("solicitud");
 
-        try {
-            String select = "SELECT * FROM solicitud";
-            Statement statementInsert = connection.createStatement();
-            ResultSet resultSet = statementInsert.executeQuery(select);
-
-            while (resultSet.next()) {
-                cantidadSolicitudes = resultSet.getInt("numero");
-            }
-
-        } catch (SQLException e) {
-
-        }
-
-        cantidadSolicitudes++;
-
-        String insert = "INSERT INTO solicitud (numero, fecha, tipo, nombre, salario, direccion) "
+        String insert = "INSERT INTO solicitud (número, fecha, tipo, nombre, salario, dirección) "
                 + "values('" + cantidadSolicitudes + "','" + data.getFecha() + "','" 
                 + data.getTipo() + "','" + data.getNombre() + "','" 
-                + data.getSalario() + "','" + data.getDireccion() + "')";
+                + data.getSalario() + "','" + data.getDireccion() + "');";
 
+        insertData(insert);
+                
+    }
+
+    private void insertData(String insert) {
         try {
-
             Statement statementInsert = connection.createStatement();
             int rowsAffected = statementInsert.executeUpdate(insert);
             System.out.println("Rows affected> " + rowsAffected);
@@ -59,13 +49,32 @@ public class ConexiónDB {
             System.out.println("Error al insertar a la DB");
             e.printStackTrace();
         }
-        
+    }
+
+    private int siguienteNumero(String tabla){
+        try {
+            int numeroSolicitud = 0;
+
+            String select = "SELECT * FROM " + tabla + ";";
+            Statement statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(select);
+
+            while (resultSet.next()) {
+                numeroSolicitud = resultSet.getInt("número");
+            }
+
+            numeroSolicitud++;
+ 
+            return numeroSolicitud;
+        } catch (SQLException e) {
+            return 1;
+        }
     }
 
     public Data_Solicitud pedirSolicitud(int numero) {
 
         try {
-            String select = "SELECT * FROM solicitud where numero = " + numero;
+            String select = "SELECT * FROM solicitud where número = " + numero;
             Statement statementInsert = connection.createStatement();
             ResultSet resultSet = statementInsert.executeQuery(select);
 
@@ -93,16 +102,9 @@ public class ConexiónDB {
     public void guardarTarjeta(Data_Tarjeta data) throws SolicitudAutorizadaException {
 
         try {
-            String select = "SELECT * FROM tarjeta where tipo = '" + data.getTipo() + "';";
-            Statement statementInsert = connection.createStatement();
-            ResultSet resultSet = statementInsert.executeQuery(select);
-
-            boolean coincidencia;
             String numero;
 
             do {
-
-                coincidencia = false;
 
                 numero = null;
                 switch (data.getTipo()) {
@@ -123,15 +125,7 @@ public class ConexiónDB {
                     numero = numero + String.valueOf(num);
                 }
 
-                while (resultSet.next()) {
-
-                    if (resultSet.getString("numero").equals(numero)) {
-                        coincidencia = true;
-                    }
-                    
-                }    
-
-            } while (coincidencia);
+            } while (coincidenciaTarjeta(numero));
 
             data.setNumero(numero);
 
@@ -140,23 +134,53 @@ public class ConexiónDB {
         e.printStackTrace();
         }
 
-        String insert = "INSERT INTO tarjeta (numero, tipo, limite, estado, numero_solicitud) "
+        String insert = "INSERT INTO tarjeta (número, tipo, limite, estado, número_solicitud) "
                 + "values('" + data.getNumero() + "','" + data.getTipo().toString() + "','" 
                 + data.getLimite() + "','" + data.getEstado() + "','" 
                 + String.valueOf(data.getNumeroSolicitud()) + "')";
 
+        insertData(insert);
+
+    }
+
+    public Boolean coincidenciaTarjeta(String numero){
+
         try {
-
+            String select = "SELECT * FROM tarjeta where tipo = '" + data.getTipo() + "';";
             Statement statementInsert = connection.createStatement();
-            int rowsAffected = statementInsert.executeUpdate(insert);
-            System.out.println("Rows affected> " + rowsAffected);
+            ResultSet resultSet = statementInsert.executeQuery(select);
 
-        } catch (SQLIntegrityConstraintViolationException e) {
-            throw new SolicitudAutorizadaException();
+            boolean coincidencia;
+
+            coincidencia = false;
+
+            while (resultSet.next()) {
+
+                if (resultSet.getString("número").equals(numero)) {
+                    coincidencia = true;
+                }
+                
+            }    
+
+            return coincidencia;
         } catch (SQLException e) {
-            System.out.println("Error al insertar a la DB");
+            System.out.println("Error al leer la DB");
+            return false;
             e.printStackTrace();
         }
+
+    }
+
+    public void guardarMovimiento(Data_Movimiento data) {
+
+        int numeroMovimiento = siguienteNumero("movimiento");
+
+        String insert = "INSERT INTO movimiento (número, número_tarjeta, fecha, tipo, descripción, establecimiento, monto) "
+                + "values('" + numeroMovimiento + "','" + data.getNumeroTarjeta() + "','" 
+                + data.getFecha() + "','" + data.getTipo() + "','" + data.getDescripcion() + "','" 
+                + data.getEstablecimiento() + "','" + data.getMonto() + "');";
+
+        insertData(insert);
 
     }
 

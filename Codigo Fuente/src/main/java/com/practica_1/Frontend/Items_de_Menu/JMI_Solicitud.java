@@ -1,15 +1,14 @@
 package com.practica_1.Frontend.Items_de_Menu;
 
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
 import java.time.LocalDate;
-import java.util.Locale;
 import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
 
 import com.practica_1.Backend.Datos.Data_Solicitud;
+import com.practica_1.Backend.Listeners.FocusListenerCasillaDinero;
+import com.practica_1.Backend.Listeners.FocusListenerCasillaPalabra;
 import com.practica_1.Frontend.Frame_principal;
 
 public class JMI_Solicitud extends JMenuItem {
@@ -114,68 +113,10 @@ public class JMI_Solicitud extends JMenuItem {
             }
             
         });
-        txf1.addFocusListener(new FocusListener() {
-
-            @Override
-            public void focusGained(FocusEvent e) {
-                lbl1.setText(" ");
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-            }
-            
-        });
-        txf2.addFocusListener(new FocusListener() {
-
-            @Override
-            public void focusGained(FocusEvent e) {
-                lbl2.setText(" ");
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-            }
-            
-        });
-        txf3.addFocusListener(new FocusListener() {
-
-            @Override
-            public void focusGained(FocusEvent e) {
-                lbl3.setText(" ");
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-
-                try {
-
-                    Float numero = Float.parseFloat(txf3.getText());
-                    DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.GERMAN);
-                    dfs.setDecimalSeparator('.');
-                    DecimalFormat df = new DecimalFormat("#.00",dfs);
-                    txf3.setText(df.format(numero));
-    
-                } catch (NumberFormatException ex) {
-                    txf3.setText("0.00");
-                    lbl3.setText("Ingrese un numero valido");
-                }
-
-            }
-            
-        });
-        txf4.addFocusListener(new FocusListener() {
-
-            @Override
-            public void focusGained(FocusEvent e) {
-                lbl4.setText(" ");
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-            }
-            
-        });
+        txf1.addFocusListener(new FocusListenerCasillaPalabra(lbl1));
+        txf2.addFocusListener(new FocusListenerCasillaPalabra(lbl2));
+        txf3.addFocusListener(new FocusListenerCasillaDinero(txf3, lbl3));
+        txf4.addFocusListener(new FocusListenerCasillaPalabra(lbl4));
 
     }
 
