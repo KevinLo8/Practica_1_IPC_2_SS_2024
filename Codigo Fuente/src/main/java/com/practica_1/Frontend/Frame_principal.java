@@ -6,6 +6,7 @@ import com.practica_1.Backend.ConexiónDB.ConexiónDB;
 import com.practica_1.Backend.Datos.Data_Config;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Ajustes;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Autorizacion;
+import com.practica_1.Frontend.Items_de_Menu.JMI_Movimiento;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Salir;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Solicitud;
 
@@ -15,7 +16,7 @@ public class Frame_principal extends JFrame {
 
     //Se crea una constante con la dimension del la pantalla
     private static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-    private int size = 600;
+    private int size = 700;
 
     //Se crea el panel de escritorio
     private JDesktopPane desktop;
@@ -68,7 +69,7 @@ public class Frame_principal extends JFrame {
         JMI_Salir itemA2 = new JMI_Salir();
 
         JMI_Solicitud itemAc1 = new JMI_Solicitud(this);
-        JMenuItem itemAc2 = new JMenuItem("Insertar Movimiento");
+        JMI_Movimiento itemAc2 = new JMI_Movimiento(this);
         JMenuItem itemAc3 = new JMenuItem("Consultar Tarjeta");
         JMI_Autorizacion itemAc4 = new JMI_Autorizacion(this);
         JMenuItem itemAc5 = new JMenuItem("Cancelar Tarjeta");

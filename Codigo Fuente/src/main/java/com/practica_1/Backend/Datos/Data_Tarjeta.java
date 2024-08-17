@@ -2,11 +2,11 @@ package com.practica_1.Backend.Datos;
 
 public class Data_Tarjeta {
 
-    String numero;
-    String tipo;
-    float limite;
-    String estado;
-    int numeroSolicitud;
+    private String numero;
+    private String tipo;
+    private float limite;
+    private String estado;
+    private int numeroSolicitud;
     
     public String getNumero() {
         return numero;
