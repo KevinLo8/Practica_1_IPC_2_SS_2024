@@ -28,7 +28,7 @@ public class Proceso_Autorizacion {
         iFrame = new JInternalFrame("Autorizacion de solicitud", false, true, false, false);
 
         //Se configura el InternalFrame
-        iFrame.setBounds((frame.getDesktop().getWidth() - 400) / 2, (frame.getDesktop().getHeight() - 200) / 2, 400, 200);
+        iFrame.setBounds((frame.getWidth() - 400) / 2, (frame.getHeight() - 200) / 2, 400, 200);
         iFrame.setLayout(new GridLayout(2, 1, 0, 5));
 
         //Se agrega el InternalFrane al Desktop

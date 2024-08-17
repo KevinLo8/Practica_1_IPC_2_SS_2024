@@ -32,7 +32,7 @@ public class ConexiónDB {
         int numeroSolicitud = siguienteNumero("solicitud");
 
         String insert = "INSERT INTO solicitud (número, fecha, tipo, nombre, salario, dirección) "
-                + "values('" + cantidadSolicitudes + "','" + data.getFecha() + "','" 
+                + "values('" + numeroSolicitud + "','" + data.getFecha() + "','" 
                 + data.getTipo() + "','" + data.getNombre() + "','" 
                 + data.getSalario() + "','" + data.getDireccion() + "');";
 
@@ -83,7 +83,7 @@ public class ConexiónDB {
             if (resultSet.next()) {
 
                 data_Solicitud.setNombre(resultSet.getString("nombre"));
-                data_Solicitud.setDireccion(resultSet.getString("direccion"));
+                data_Solicitud.setDireccion(resultSet.getString("dirección"));
                 Float num = resultSet.getFloat("salario");
                 data_Solicitud.setSalario(num.toString());
                 data_Solicitud.setTipo(resultSet.getString("tipo"));
@@ -101,38 +101,32 @@ public class ConexiónDB {
 
     public void guardarTarjeta(Data_Tarjeta data) throws SolicitudAutorizadaException {
 
-        try {
-            String numero;
+        String numero;
 
-            do {
+        do {
 
-                numero = null;
-                switch (data.getTipo()) {
-                    case "NACIONAL":
-                        numero = "42563102654";
-                        break;
-                    case "REGIONAL":
-                        numero = "42563102656";
-                        break;
-                    case "INTERNACIONAL":
-                        numero = "42563102658";
-                        break;
-                }
+            numero = null;
+            switch (data.getTipo()) {
+                case "NACIONAL":
+                    numero = "42563102654";
+                    break;
+                case "REGIONAL":
+                    numero = "42563102656";
+                    break;
+                case "INTERNACIONAL":
+                    numero = "42563102658";
+                    break;
+            }
 
-                for (int i = 0; i < 5; i++) {
-                    int num = (int)Math.floor(Math.random() * 10);
+            for (int i = 0; i < 5; i++) {
+                int num = (int)Math.floor(Math.random() * 10);
 
-                    numero = numero + String.valueOf(num);
-                }
+                numero = numero + String.valueOf(num);
+            }
 
-            } while (coincidenciaTarjeta(numero));
+        } while (coincidenciaTarjeta(numero));
 
-            data.setNumero(numero);
-
-        } catch (SQLException e) {
-            System.out.println("Error al insertar a la DB");
-        e.printStackTrace();
-        }
+        data.setNumero(numero);
 
         String insert = "INSERT INTO tarjeta (número, tipo, limite, estado, número_solicitud) "
                 + "values('" + data.getNumero() + "','" + data.getTipo().toString() + "','" 
@@ -146,7 +140,7 @@ public class ConexiónDB {
     public Boolean coincidenciaTarjeta(String numero){
 
         try {
-            String select = "SELECT * FROM tarjeta where tipo = '" + data.getTipo() + "';";
+            String select = "SELECT * FROM tarjeta";
             Statement statementInsert = connection.createStatement();
             ResultSet resultSet = statementInsert.executeQuery(select);
 
@@ -165,8 +159,8 @@ public class ConexiónDB {
             return coincidencia;
         } catch (SQLException e) {
             System.out.println("Error al leer la DB");
-            return false;
             e.printStackTrace();
+            return false;
         }
 
     }

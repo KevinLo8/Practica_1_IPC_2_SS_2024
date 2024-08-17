@@ -28,8 +28,8 @@ public class Proceso_Movimiento {
         iFrame = new JInternalFrame("Ingreso de movimiento", false, true, false, false);
 
         //Se configura el InternalFrame
-        iFrame.setBounds((frame.getDesktop().getWidth() - 400) / 2, (frame.getDesktop().getHeight() - 600) / 2, 400, 600);
-        iFrame.setLayout(new GridLayout(2, 1, 0, 5));
+        iFrame.setBounds((frame.getWidth() - 400) / 2, (frame.getHeight() - 600) / 2, 400, 600);
+        iFrame.setLayout(new GridLayout(7, 1, 0, 5));
 
         //Se agrega el InternalFrane al Desktop
         frame.getDesktop().add(iFrame);
@@ -69,7 +69,7 @@ public class Proceso_Movimiento {
         txf1.setPreferredSize(new Dimension(200, 25));
         txf1.setHorizontalAlignment(JTextField.CENTER);
         txf2 = new JTextField();
-        txf2.setPreferredSize(new Dimension(75, 25));
+        txf2.setPreferredSize(new Dimension(200, 25));
         txf2.setHorizontalAlignment(JTextField.CENTER);
         txf3 = new JTextField();
         txf3.setPreferredSize(new Dimension(200, 25));
@@ -153,10 +153,11 @@ public class Proceso_Movimiento {
         }
 
         try {
-            int dia = Integer.valueOf(txf3.getText().substring(0, 2));
-            int mes = Integer.valueOf(txf3.getText().substring(3, 5));
-            int año = Integer.valueOf(txf3.getText().substring(6, 10));
-            LocalDate date = LocalDate.of(dia, mes, año);
+            String fecha = txf2.getText();
+            int dia = Integer.valueOf(txf2.getText().substring(0, 2));
+            int mes = Integer.valueOf(txf2.getText().substring(3, 5));
+            int año = Integer.valueOf(txf2.getText().substring(6, 10));
+            LocalDate date = LocalDate.of(año, mes, dia);
 
             data.setFecha(date.toString());
             completo++;

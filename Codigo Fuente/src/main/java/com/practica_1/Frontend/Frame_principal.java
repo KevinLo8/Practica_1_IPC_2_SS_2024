@@ -16,7 +16,7 @@ public class Frame_principal extends JFrame {
 
     //Se crea una constante con la dimension del la pantalla
     private static Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-    private int size = 600;
+    private int size = 700;
 
     //Se crea el panel de escritorio
     private JDesktopPane desktop;
