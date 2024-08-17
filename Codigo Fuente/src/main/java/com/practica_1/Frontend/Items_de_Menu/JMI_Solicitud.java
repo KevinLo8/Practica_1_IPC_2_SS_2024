@@ -206,7 +206,7 @@ public class JMI_Solicitud extends JMenuItem {
         }
 
         if (txf4.getText().equalsIgnoreCase("NACIONAL") || txf4.getText().equalsIgnoreCase("REGIONAL") || txf4.getText().equalsIgnoreCase("INTERNACIONAL")) {
-            data.setTipo(txf4.getText());
+            data.setTipo(txf4.getText().toUpperCase());
             completo++;
         } else {
             lbl4.setText("Ingrese un tipo de tarjeta valido");

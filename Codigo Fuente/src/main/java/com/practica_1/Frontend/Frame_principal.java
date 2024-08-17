@@ -5,6 +5,7 @@ import javax.swing.*;
 import com.practica_1.Backend.ConexiónDB.ConexiónDB;
 import com.practica_1.Backend.Datos.Data_Config;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Ajustes;
+import com.practica_1.Frontend.Items_de_Menu.JMI_Autorizacion;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Salir;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Solicitud;
 
@@ -69,7 +70,7 @@ public class Frame_principal extends JFrame {
         JMI_Solicitud itemAc1 = new JMI_Solicitud(this);
         JMenuItem itemAc2 = new JMenuItem("Insertar Movimiento");
         JMenuItem itemAc3 = new JMenuItem("Consultar Tarjeta");
-        JMenuItem itemAc4 = new JMenuItem("Autorizar Tarjeta");
+        JMI_Autorizacion itemAc4 = new JMI_Autorizacion(this);
         JMenuItem itemAc5 = new JMenuItem("Cancelar Tarjeta");
 
         JMenuItem itemR1 = new JMenuItem("Solicitud Nueva");
