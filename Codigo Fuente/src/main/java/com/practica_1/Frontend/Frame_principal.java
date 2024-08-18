@@ -2,7 +2,8 @@ package com.practica_1.Frontend;
 
 import javax.swing.*;
 
-import com.practica_1.Backend.ConexiónDB.ConexiónDB;
+import com.practica_1.Backend.Calculador_Cuentas.Calculador_Cuentas;
+import com.practica_1.Backend.Conexión_DB.Conexión_DB;
 import com.practica_1.Backend.Datos.Data_Config;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Ajustes;
 import com.practica_1.Frontend.Items_de_Menu.JMI_Autorizacion;
@@ -26,7 +27,10 @@ public class Frame_principal extends JFrame {
     private Data_Config config;
 
     //Se conecta crea la coneccion con la DB
-    private ConexiónDB conexion;
+    private Conexión_DB conexion;
+
+    //Se crea la clase que hara los calculos
+    private Calculador_Cuentas calculador_Cuentas;
 
     /**
      * Se crea el constructor del frame
@@ -37,7 +41,10 @@ public class Frame_principal extends JFrame {
         config = new Data_Config();
 
         //Se declara la DB
-        conexion = new ConexiónDB();
+        conexion = new Conexión_DB();
+
+        //Se declara la calculadora
+        calculador_Cuentas = new Calculador_Cuentas();
 
         initComponentes();
     }
@@ -107,8 +114,12 @@ public class Frame_principal extends JFrame {
         return config;
     }
 
-    public ConexiónDB getConexion() {
+    public Conexión_DB getConexion() {
         return conexion;
+    }
+
+    public Calculador_Cuentas getCalculador() {
+        return calculador_Cuentas;
     }
 
 }

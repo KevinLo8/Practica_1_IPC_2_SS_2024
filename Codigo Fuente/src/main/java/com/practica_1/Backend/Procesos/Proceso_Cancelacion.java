@@ -2,18 +2,13 @@ package com.practica_1.Backend.Procesos;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
 
 import javax.swing.*;
 
-import com.practica_1.Backend.ConexiónArchivo.ConexionArchivo;
-import com.practica_1.Backend.Datos.Data_Solicitud;
-import com.practica_1.Backend.Datos.Data_Tarjeta;
-import com.practica_1.Backend.GeneradorHTML.GeneradorHTML;
 import com.practica_1.Backend.Listeners.FocusListenerCasillaTarjeta;
 import com.practica_1.Frontend.Frame_principal;
 
-public class Proceso_Consulta {
+public class Proceso_Cancelacion {
 
     private Frame_principal frame;
     private JInternalFrame iFrame;
@@ -23,7 +18,7 @@ public class Proceso_Consulta {
 
     
 
-    public Proceso_Consulta(Frame_principal frame) {
+    public Proceso_Cancelacion(Frame_principal frame) {
         this.frame = frame;
 
         //Se inicia el InternalFrame
@@ -81,28 +76,6 @@ public class Proceso_Consulta {
     }
 
     private void btnConsultarActionPerformer(){
-
-        try {
-            Data_Tarjeta data_Tarjeta = frame.getConexion().pedirTarjeta(txf1.getText());
-
-            if (data_Tarjeta != null) {
-                Data_Solicitud data_Solicitud = frame.getConexion().pedirSolicitud(data_Tarjeta.getNumeroSolicitud());
-    
-                String stringHTML = GeneradorHTML.ConsultaHTML(data_Tarjeta, data_Solicitud);
-                String pathSalida = frame.getConfig().getDirecciónSalida();
-                String nombreArchivo = "Consulta sobre tarjeta No. " + data_Tarjeta.getNumero() + ".html";
-        
-                ConexionArchivo.guardarArchivo(pathSalida, stringHTML, nombreArchivo);
-        
-                lbl1.setText("Consulta generada con exito");                
-            } else {
-                if (lbl1.getText().equals(" ")) {
-                    lbl1.setText("Número de tarjeta no existente");                
-                }
-            }    
-        } catch (IOException e) {
-            lbl1.setText("Dirección de salida no especificada");                
-        }
         
     }
 

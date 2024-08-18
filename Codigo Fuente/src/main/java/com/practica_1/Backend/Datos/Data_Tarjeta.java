@@ -76,15 +76,4 @@ public class Data_Tarjeta {
         return numeroIn;
     }
 
-    public static float sacarCredito(float in) {
-        
-        double cantidad = in;
-
-        cantidad = cantidad * 0.6;
-        
-        float out = (float) cantidad;
-
-        return out;
-    }
-
 }

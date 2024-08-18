@@ -87,7 +87,8 @@ public class Proceso_Autorizacion {
                 Data_Solicitud dataSolicitud = frame.getConexion().pedirSolicitud(numero);
                 if (dataSolicitud != null) {
                 
-                    float credito = Data_Tarjeta.sacarCredito(Float.parseFloat(dataSolicitud.getSalario()));
+                    float sueldo = Float.parseFloat(dataSolicitud.getSalario());
+                    float credito = frame.getCalculador().sacarCredito(sueldo);
                     float minimo = 0;
 
                     switch (dataSolicitud.getTipo()) {
