@@ -2,7 +2,6 @@ package com.practica_1.Backend.Procesos;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import javax.swing.*;
