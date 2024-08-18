@@ -87,7 +87,7 @@ public class Proceso_Autorizacion {
                 Data_Solicitud dataSolicitud = frame.getConexion().pedirSolicitud(numero);
                 if (dataSolicitud != null) {
                 
-                    float credito = Float.parseFloat(dataSolicitud.getSalario());
+                    float credito = Data_Tarjeta.sacarCredito(Float.parseFloat(dataSolicitud.getSalario()));
                     float minimo = 0;
 
                     switch (dataSolicitud.getTipo()) {
@@ -107,7 +107,7 @@ public class Proceso_Autorizacion {
 
                         data.setNumeroSolicitud(numero);
                         data.setTipo(dataSolicitud.getTipo());
-                        data.setLimite(minimo);
+                        data.setLimite(credito);
                         data.setEstado("Activada");
 
                         frame.getConexion().guardarTarjeta(data);
@@ -125,7 +125,8 @@ public class Proceso_Autorizacion {
             lbl1.setText("Ingrese un numero de solicitud valido");
         } catch (SolicitudAutorizadaException e) {
             lbl1.setText("Solicitud selecionada ya esta autorizada");
-        }
+        } 
+
     }
 
     public void hacerVisible() {
