@@ -241,7 +241,7 @@ public class Conexión_DB {
 
     public void cambiarEstadoCuenta(String numero){
             
-        String select = "UPDATE tarjeta set estado = 'cancelado' where número = '" + numero + "';";
+        String select = "UPDATE tarjeta set estado = 'Cancelada' where número = '" + numero + "';";
         insertData(select);
 
     }
