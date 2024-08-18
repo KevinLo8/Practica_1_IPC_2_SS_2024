@@ -15,7 +15,7 @@ import com.practica_1.Frontend.Frame_principal;
 
 public class Proceso_Consulta {
 
-        private Frame_principal frame;
+    private Frame_principal frame;
     private JInternalFrame iFrame;
     private JTextField txf1;
     private JLabel lbl1;

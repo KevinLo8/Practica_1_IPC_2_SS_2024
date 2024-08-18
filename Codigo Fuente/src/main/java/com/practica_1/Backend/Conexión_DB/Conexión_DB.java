@@ -1,4 +1,4 @@
-package com.practica_1.Backend.ConexiónDB;
+package com.practica_1.Backend.Conexión_DB;
 
 import java.sql.*;
 
@@ -6,9 +6,8 @@ import com.practica_1.Backend.Datos.Data_Movimiento;
 import com.practica_1.Backend.Datos.Data_Solicitud;
 import com.practica_1.Backend.Datos.Data_Tarjeta;
 import com.practica_1.Backend.Exception.SolicitudAutorizadaException;
-import com.practica_1.Frontend.Items_de_Menu.JMI_Autorizacion;
 
-public class ConexiónDB {
+public class Conexión_DB {
 
     private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/CONTROL_BANCO";
     private static final String USER = "rootdba";
@@ -16,7 +15,7 @@ public class ConexiónDB {
 
     private Connection connection;
 
-    public ConexiónDB(){
+    public Conexión_DB(){
         try {
             connection = DriverManager.getConnection(URL_MYSQL, USER, PASSWORD);
             connection.setSchema("CONTROL_BANCO");
@@ -211,4 +210,19 @@ public class ConexiónDB {
 
     }
 
+    public ResultSet pedirMovimientos(String numero) {
+
+        try {
+            
+            String select = "SELECT * FROM movimiento where número_tarjeta = '" + numero + "';";
+            Statement statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(select);
+
+            return resultSet;
+
+        } catch (SQLException e) {
+            return null;
+        }
+
+    } 
 }
