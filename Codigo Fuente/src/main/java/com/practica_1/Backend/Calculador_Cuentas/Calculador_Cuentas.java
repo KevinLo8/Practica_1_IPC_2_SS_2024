@@ -1,5 +1,7 @@
 package com.practica_1.Backend.Calculador_Cuentas;
 
+import java.sql.ResultSet;
+
 public class Calculador_Cuentas {
 
     public float sacarCredito(float in) {
@@ -13,4 +15,9 @@ public class Calculador_Cuentas {
         return out;
     }
 
+    public boolean tieneSaldoPendiente(ResultSet resultSet) {
+
+
+        return false;
+    }
 }
