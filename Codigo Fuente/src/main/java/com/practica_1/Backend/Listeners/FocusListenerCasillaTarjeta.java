@@ -24,6 +24,7 @@ public class FocusListenerCasillaTarjeta implements FocusListener {
     @Override
     public void focusLost(FocusEvent e) {
         try {
+            Data_Tarjeta.revisarNumero(txf.getText());
             if (txf.getText().length() == 16) {
                 String numero = Data_Tarjeta.convertirNumero(txf.getText());
                 txf.setText(numero);

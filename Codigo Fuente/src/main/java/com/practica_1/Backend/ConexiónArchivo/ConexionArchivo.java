@@ -1,21 +1,18 @@
 package com.practica_1.Backend.ConexiónArchivo;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 
 public class ConexionArchivo {
 
-    public static void guardarArchivo(String path, String data, String nombre){
+    public static void guardarArchivo(String path, String data, String nombre) throws IOException {
 
-        File file = new File(path + "/" + nombre);
+        String pathName = path + "/" + nombre;
+        File file = new File(pathName);
 
-        try (FileWriter fileWriter = new FileWriter(file);
-                BufferedWriter writer = new BufferedWriter(fileWriter);) {
-            writer.append(data);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        FileWriter fileWriter = new FileWriter(file);
+        BufferedWriter writer = new BufferedWriter(fileWriter);
+        writer.append(data);
+        writer.close();
+        fileWriter.close();
     }
 }

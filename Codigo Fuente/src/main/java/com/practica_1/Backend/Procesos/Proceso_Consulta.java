@@ -2,6 +2,8 @@ package com.practica_1.Backend.Procesos;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import javax.swing.*;
 
@@ -52,7 +54,7 @@ public class Proceso_Consulta {
         JButton btn1 = new JButton("Consultar");
 
         txf1 = new JTextField();
-        txf1.setPreferredSize(new Dimension(200, 25));
+        txf1.setPreferredSize(new Dimension(300, 25));
         txf1.setHorizontalAlignment(JTextField.CENTER);
 
         //Se agregan los componentes al InternalFrame
@@ -81,15 +83,28 @@ public class Proceso_Consulta {
 
     private void btnConsultarActionPerformer(){
 
-        Data_Tarjeta data_Tarjeta = frame.getConexion().pedirTarjeta(txf1.getText());
-        Data_Solicitud data_Solicitud = frame.getConexion().pedirSolicitud(data_Tarjeta.getNumeroSolicitud());
+        try {
+            Data_Tarjeta data_Tarjeta = frame.getConexion().pedirTarjeta(txf1.getText());
 
-        String stringHTML = GeneradorHTML.ConsultaHTML(data_Tarjeta, data_Solicitud);
-        String pathSalida = frame.getConfig().getDirecciónSalida();
-        String nombreArchivo = "Consulta sobre tarjeta No. " + data_Tarjeta.getNumero() + ".html";
-
-        ConexionArchivo.guardarArchivo(pathSalida, stringHTML, nombreArchivo);
-
+            if (data_Tarjeta != null) {
+                Data_Solicitud data_Solicitud = frame.getConexion().pedirSolicitud(data_Tarjeta.getNumeroSolicitud());
+    
+                String stringHTML = GeneradorHTML.ConsultaHTML(data_Tarjeta, data_Solicitud);
+                String pathSalida = frame.getConfig().getDirecciónSalida();
+                String nombreArchivo = "Consulta sobre tarjeta No. " + data_Tarjeta.getNumero() + ".html";
+        
+                ConexionArchivo.guardarArchivo(pathSalida, stringHTML, nombreArchivo);
+        
+                lbl1.setText("Consulta generada con exito");                
+            } else {
+                if (lbl1.getText().equals(" ")) {
+                    lbl1.setText("Número de tarjeta no existente");                
+                }
+            }    
+        } catch (IOException e) {
+            lbl1.setText("Dirección de salida no especificada");                
+        }
+        
     }
 
     public void hacerVisible() {

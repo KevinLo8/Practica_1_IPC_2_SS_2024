@@ -209,7 +209,7 @@ public class JMI_Ajustes extends JMenuItem {
         file = new File(txf3.getText());
         if (file.exists()) {
             if (file.isDirectory()) {
-                frame.getConfig().setArchivoEntrada(txf3.getText());
+                frame.getConfig().setDirecciónSalida(txf3.getText());
                 lbl6.setText("Direccion guardada exitosamente");
             } else {
                 lbl6.setText("Direccion ingresada no valida");

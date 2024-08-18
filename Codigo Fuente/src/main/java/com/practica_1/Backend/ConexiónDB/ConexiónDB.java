@@ -194,10 +194,9 @@ public class ConexiónDB {
 
             if (resultSet.next()) {
 
-                data_Tarjeta.setNumero(resultSet.getString("númerp"));
+                data_Tarjeta.setNumero(resultSet.getString("número"));
                 data_Tarjeta.setTipo((resultSet.getString("tipo")));
-                Float num = resultSet.getFloat("limite");
-                data_Tarjeta.setLimite(num.toString());
+                data_Tarjeta.setLimite(resultSet.getFloat("limite"));
                 data_Tarjeta.setEstado(resultSet.getString("estado"));
                 data_Tarjeta.setNumeroSolicitud(resultSet.getInt("número_solicitud"));
 

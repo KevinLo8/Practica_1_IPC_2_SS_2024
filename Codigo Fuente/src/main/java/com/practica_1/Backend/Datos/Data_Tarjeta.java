@@ -44,7 +44,7 @@ public class Data_Tarjeta {
         int a = Integer.valueOf(numeroIn.substring(0, 4));
         int b = Integer.valueOf(numeroIn.substring(4, 8));
         int c = Integer.valueOf(numeroIn.substring(8, 12));
-        int d = Integer.valueOf(numeroIn.substring(12, 17));
+        int d = Integer.valueOf(numeroIn.substring(12));
 
         String numeroOut = String.valueOf(a) + " " + String.valueOf(b) + " " + String.valueOf(c) + " " + String.valueOf(d);
 
@@ -56,11 +56,35 @@ public class Data_Tarjeta {
         int a = Integer.valueOf(numeroIn.substring(0, 4));
         int b = Integer.valueOf(numeroIn.substring(5, 9));
         int c = Integer.valueOf(numeroIn.substring(10, 14));
-        int d = Integer.valueOf(numeroIn.substring(15, 19));
+        int d = Integer.valueOf(numeroIn.substring(15));
 
         String numeroOut = String.valueOf(a) + " " + String.valueOf(b) + " " + String.valueOf(c) + " " + String.valueOf(d);
 
         return numeroOut;
+    }
+
+    public static String revisarNumero(String numeroIn) throws NumberFormatException {
+        
+        for (int i = 0; i < numeroIn.length(); i++) {
+            if (numeroIn.charAt(i) != 32) {
+                if (numeroIn.charAt(i) < 48 || numeroIn.charAt(i) > 57) {
+                    throw new NumberFormatException();
+                }
+            }
+        }
+
+        return numeroIn;
+    }
+
+    public static float sacarCredito(float in) {
+        
+        double cantidad = in;
+
+        cantidad = cantidad * 0.6;
+        
+        float out = (float) cantidad;
+
+        return out;
     }
 
 }

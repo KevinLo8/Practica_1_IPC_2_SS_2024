@@ -13,7 +13,7 @@ public class JMI_Consulta extends JMenuItem {
     
     public JMI_Consulta(Frame_principal frame) {
         
-        super("Autorizacion de solicitud");
+        super("Consulta Tarjeta");
 
         proceso = new Proceso_Consulta(frame);  
 
