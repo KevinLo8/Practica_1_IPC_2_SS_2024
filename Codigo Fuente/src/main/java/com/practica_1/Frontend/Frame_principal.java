@@ -5,12 +5,13 @@ import javax.swing.*;
 import com.practica_1.Backend.Calculador_Cuentas.Calculador_Cuentas;
 import com.practica_1.Backend.Conexión_DB.Conexión_DB;
 import com.practica_1.Backend.Datos.Data_Config;
-import com.practica_1.Frontend.Items_de_Menu.JMI_Ajustes;
-import com.practica_1.Frontend.Items_de_Menu.JMI_Autorizacion;
-import com.practica_1.Frontend.Items_de_Menu.JMI_Consulta;
-import com.practica_1.Frontend.Items_de_Menu.JMI_Movimiento;
-import com.practica_1.Frontend.Items_de_Menu.JMI_Salir;
-import com.practica_1.Frontend.Items_de_Menu.JMI_Solicitud;
+import com.practica_1.Frontend.MenuItem.JMI_Ajustes;
+import com.practica_1.Frontend.MenuItem.JMI_Autorizacion;
+import com.practica_1.Frontend.MenuItem.JMI_Cancelacion;
+import com.practica_1.Frontend.MenuItem.JMI_Consulta;
+import com.practica_1.Frontend.MenuItem.JMI_Movimiento;
+import com.practica_1.Frontend.MenuItem.JMI_Salir;
+import com.practica_1.Frontend.MenuItem.JMI_Solicitud;
 
 import java.awt.*;
 
@@ -80,7 +81,7 @@ public class Frame_principal extends JFrame {
         JMI_Movimiento itemAc2 = new JMI_Movimiento(this);
         JMI_Consulta itemAc3 = new JMI_Consulta(this);
         JMI_Autorizacion itemAc4 = new JMI_Autorizacion(this);
-        JMenuItem itemAc5 = new JMenuItem("Cancelar Tarjeta");
+        JMI_Cancelacion itemAc5 = new JMI_Cancelacion(this);
 
         JMenuItem itemR1 = new JMenuItem("Solicitud Nueva");
         JMenuItem itemR2 = new JMenuItem("Insertar Movimiento");

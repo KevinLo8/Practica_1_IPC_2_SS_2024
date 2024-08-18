@@ -147,9 +147,7 @@ public class Conexión_DB {
             Statement statementInsert = connection.createStatement();
             ResultSet resultSet = statementInsert.executeQuery(select);
 
-            boolean coincidencia;
-
-            coincidencia = false;
+            boolean coincidencia = false;
 
             while (resultSet.next()) {
 
@@ -166,6 +164,21 @@ public class Conexión_DB {
             return false;
         }
 
+    }
+
+    public Boolean estaActivaTarjeta(String numero){
+
+        Data_Tarjeta data_Tarjeta = pedirTarjeta(numero);
+
+        boolean coincidencia;
+
+        coincidencia = false;
+
+        if (data_Tarjeta.getEstado().equals("Activada")) {
+            coincidencia = true;
+        }
+
+        return coincidencia;
     }
 
     public void guardarMovimiento(Data_Movimiento data) {
@@ -225,4 +238,11 @@ public class Conexión_DB {
         }
 
     } 
+
+    public void cambiarEstadoCuenta(String numero){
+            
+        String select = "UPDATE tarjeta set estado = 'cancelado' where número = '" + numero + "';";
+        insertData(select);
+
+    }
 }

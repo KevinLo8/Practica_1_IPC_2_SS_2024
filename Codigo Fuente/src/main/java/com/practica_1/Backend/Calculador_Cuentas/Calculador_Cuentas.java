@@ -1,6 +1,6 @@
 package com.practica_1.Backend.Calculador_Cuentas;
 
-import java.sql.ResultSet;
+import java.sql.*;
 
 public class Calculador_Cuentas {
 
@@ -15,9 +15,23 @@ public class Calculador_Cuentas {
         return out;
     }
 
-    public boolean tieneSaldoPendiente(ResultSet resultSet) {
+    public boolean tieneSaldoPendiente(ResultSet resultSet) throws SQLException {
 
+        float saldo = 0;
 
-        return false;
+        while (resultSet.next()) {
+            if (resultSet.getString("tipo").equals("CARGO")) {
+                saldo += resultSet.getFloat("Monto");
+            } else {
+                saldo -= resultSet.getFloat("Monto");
+            }
+        }
+
+        if (saldo > 0) {
+            return true;
+        } else {
+            return false;
+        }
+
     }
 }
