@@ -39,5 +39,28 @@ public class Data_Tarjeta {
         this.numeroSolicitud = numeroSolicitud;
     }
 
-    
+    public static String convertirNumero(String numeroIn) throws NumberFormatException {
+
+        int a = Integer.valueOf(numeroIn.substring(0, 4));
+        int b = Integer.valueOf(numeroIn.substring(4, 8));
+        int c = Integer.valueOf(numeroIn.substring(8, 12));
+        int d = Integer.valueOf(numeroIn.substring(12, 17));
+
+        String numeroOut = String.valueOf(a) + " " + String.valueOf(b) + " " + String.valueOf(c) + " " + String.valueOf(d);
+
+        return numeroOut;
+    }
+
+    public static String chequearNumero(String numeroIn) throws NumberFormatException {
+
+        int a = Integer.valueOf(numeroIn.substring(0, 4));
+        int b = Integer.valueOf(numeroIn.substring(5, 9));
+        int c = Integer.valueOf(numeroIn.substring(10, 14));
+        int d = Integer.valueOf(numeroIn.substring(15, 19));
+
+        String numeroOut = String.valueOf(a) + " " + String.valueOf(b) + " " + String.valueOf(c) + " " + String.valueOf(d);
+
+        return numeroOut;
+    }
+
 }

@@ -9,6 +9,7 @@ import javax.swing.*;
 import com.practica_1.Backend.Datos.Data_Movimiento;
 import com.practica_1.Backend.Listeners.FocusListenerCasillaDinero;
 import com.practica_1.Backend.Listeners.FocusListenerCasillaPalabra;
+import com.practica_1.Backend.Listeners.FocusListenerCasillaTarjeta;
 import com.practica_1.Frontend.Frame_principal;
 
 public class Proceso_Movimiento {
@@ -129,7 +130,7 @@ public class Proceso_Movimiento {
             }
             
         });
-        txf1.addFocusListener(new FocusListenerCasillaPalabra(lbl1));
+        txf1.addFocusListener(new FocusListenerCasillaTarjeta(txf1, lbl1));
         txf2.addFocusListener(new FocusListenerCasillaPalabra(lbl2));
         txf3.addFocusListener(new FocusListenerCasillaPalabra(lbl3));
         txf4.addFocusListener(new FocusListenerCasillaPalabra(lbl4));
@@ -153,7 +154,6 @@ public class Proceso_Movimiento {
         }
 
         try {
-            String fecha = txf2.getText();
             int dia = Integer.valueOf(txf2.getText().substring(0, 2));
             int mes = Integer.valueOf(txf2.getText().substring(3, 5));
             int año = Integer.valueOf(txf2.getText().substring(6, 10));

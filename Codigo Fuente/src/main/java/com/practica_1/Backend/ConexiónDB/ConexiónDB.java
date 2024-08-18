@@ -74,7 +74,8 @@ public class ConexiónDB {
     public Data_Solicitud pedirSolicitud(int numero) {
 
         try {
-            String select = "SELECT * FROM solicitud where número = " + numero;
+            
+            String select = "SELECT * FROM solicitud where número = '" + numero + "';";
             Statement statementInsert = connection.createStatement();
             ResultSet resultSet = statementInsert.executeQuery(select);
 
@@ -97,6 +98,7 @@ public class ConexiónDB {
         } catch (SQLException e) {
             return null;
         }
+
     }
 
     public void guardarTarjeta(Data_Tarjeta data) throws SolicitudAutorizadaException {
@@ -123,6 +125,8 @@ public class ConexiónDB {
 
                 numero = numero + String.valueOf(num);
             }
+
+            numero = Data_Tarjeta.convertirNumero(numero);
 
         } while (coincidenciaTarjeta(numero));
 
@@ -175,6 +179,36 @@ public class ConexiónDB {
                 + data.getEstablecimiento() + "','" + data.getMonto() + "');";
 
         insertData(insert);
+
+    }
+
+    public Data_Tarjeta pedirTarjeta(String numero) {
+
+        try {
+            
+            String select = "SELECT * FROM tarjeta where número = '" + numero + "';";
+            Statement statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(select);
+
+            Data_Tarjeta data_Tarjeta  = new Data_Tarjeta();
+
+            if (resultSet.next()) {
+
+                data_Tarjeta.setNumero(resultSet.getString("númerp"));
+                data_Tarjeta.setTipo((resultSet.getString("tipo")));
+                Float num = resultSet.getFloat("limite");
+                data_Tarjeta.setLimite(num.toString());
+                data_Tarjeta.setEstado(resultSet.getString("estado"));
+                data_Tarjeta.setNumeroSolicitud(resultSet.getInt("número_solicitud"));
+
+                return data_Tarjeta;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException e) {
+            return null;
+        }
 
     }
 

@@ -125,7 +125,8 @@ public class Proceso_Autorizacion {
             lbl1.setText("Ingrese un numero de solicitud valido");
         } catch (SolicitudAutorizadaException e) {
             lbl1.setText("Solicitud selecionada ya esta autorizada");
-        }
+        } 
+
     }
 
     public void hacerVisible() {
