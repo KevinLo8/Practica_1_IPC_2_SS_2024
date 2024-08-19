@@ -1,6 +1,5 @@
 package com.practica_1.Backend.Conexión_DB;
 
-import java.net.URL;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -10,7 +9,6 @@ import com.practica_1.Backend.Datos.Data_Tarjeta;
 
 public class Conexión_DB {
 
-    private static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
     private static final String URL_MYSQL = "jdbc:mysql://localhost:3306/CONTROL_BANCO";
     private static final String USER = "rootdba";
     private static final String PASSWORD = "12345";
