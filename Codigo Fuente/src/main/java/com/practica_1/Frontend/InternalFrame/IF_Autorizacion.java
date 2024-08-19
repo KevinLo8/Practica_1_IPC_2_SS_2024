@@ -2,6 +2,7 @@ package com.practica_1.Frontend.InternalFrame;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.time.LocalDate;
 
 import javax.swing.*;
 
@@ -34,6 +35,9 @@ public class IF_Autorizacion extends JInternalFrame {
     }
 
     private void initComponentes(){
+
+        //Se configura el InternalFrame
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         //Se inician los componentes del InternalFrame
         JPanel pnl1 = new JPanel();
@@ -106,6 +110,9 @@ public class IF_Autorizacion extends JInternalFrame {
                         data.setLimite(credito);
                         data.setEstado("Activada");
 
+                        LocalDate fecha = LocalDate.now();
+                        data.setFechaAutorizacion(fecha);
+
                         frame.getConexion().guardarTarjeta(data);
 
                         dispose();
@@ -128,6 +135,7 @@ public class IF_Autorizacion extends JInternalFrame {
     public void hacerVisible() {
 
         setVisible(true);
+        txf1.setText("");
 
     }
 

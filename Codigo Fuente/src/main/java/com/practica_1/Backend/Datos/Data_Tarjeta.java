@@ -1,5 +1,7 @@
 package com.practica_1.Backend.Datos;
 
+import java.time.LocalDate;
+
 public class Data_Tarjeta {
 
     private String numero;
@@ -7,6 +9,7 @@ public class Data_Tarjeta {
     private float limite;
     private String estado;
     private int numeroSolicitud;
+    private LocalDate fechaAutorizacion;
     
     public String getNumero() {
         return numero;
@@ -37,6 +40,12 @@ public class Data_Tarjeta {
     }
     public void setNumeroSolicitud(int numeroSolicitud) {
         this.numeroSolicitud = numeroSolicitud;
+    }
+    public LocalDate getFechaAutorizacion() {
+        return fechaAutorizacion;
+    }
+    public void setFechaAutorizacion(LocalDate fechaAutorizacion) {
+        this.fechaAutorizacion = fechaAutorizacion;
     }
 
     public static String convertirNumero(String numeroIn) throws NumberFormatException {

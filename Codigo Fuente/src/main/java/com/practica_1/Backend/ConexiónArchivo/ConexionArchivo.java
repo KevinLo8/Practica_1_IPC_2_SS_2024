@@ -21,4 +21,18 @@ public class ConexionArchivo {
         writer.close();
         fileWriter.close();
     }
+
+    public static String GenerarNombre(String path, String nombre) {
+
+        File file;
+        int numero = 0;
+
+        do {
+            numero++;
+            String pathName = path + "/" + nombre + String.valueOf(numero);
+            file = new File(pathName);
+        } while (file.exists());
+
+        return nombre + String.valueOf(numero);
+    }
 }

@@ -24,7 +24,7 @@ public class IF_Solicitud extends JInternalFrame {
         this.frame = frame;
 
         //Se configura el InternalFrame
-        setBounds((frame.getDesktop().getWidth() - 400) / 2, (frame.getDesktop().getHeight() - 450) / 2, 400, 450);
+        setBounds((frame.getWidth() - 400) / 2, (frame.getHeight() - 450) / 2, 400, 450);
         setLayout(new GridLayout(5, 1, 0, 5));
 
         //Se agrega el InternalFrane al Desktop
@@ -35,6 +35,9 @@ public class IF_Solicitud extends JInternalFrame {
     }
 
     private void initComponentes(){
+
+        //Se configura el InternalFrame
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         //Se inician los componentes del InternalFrame
         JPanel pnl1 = new JPanel();
@@ -151,9 +154,11 @@ public class IF_Solicitud extends JInternalFrame {
 
     public void hacerVisible() {
 
-        if (!isVisible()) {
-            setVisible(true);
-        }
+        setVisible(true);
+        txf1.setText("");
+        txf2.setText("");
+        txf3.setText("");
+        txf4.setText("");
 
     }
 
