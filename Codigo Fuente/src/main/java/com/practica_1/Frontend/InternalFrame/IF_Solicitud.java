@@ -135,7 +135,9 @@ public class IF_Solicitud extends JInternalFrame {
             lbl3.setText("Ingrese un numero mayor a 0");
         }
 
-        if (txf4.getText().equalsIgnoreCase("NACIONAL") || txf4.getText().equalsIgnoreCase("REGIONAL") || txf4.getText().equalsIgnoreCase("INTERNACIONAL")) {
+        if (txf4.getText().equalsIgnoreCase("NACIONAL") || 
+                txf4.getText().equalsIgnoreCase("REGIONAL") || 
+                txf4.getText().equalsIgnoreCase("INTERNACIONAL")) {
             data.setTipo(txf4.getText().toUpperCase());
             completo++;
         } else {
@@ -143,12 +145,15 @@ public class IF_Solicitud extends JInternalFrame {
         }
 
         if (completo == 4) {
+
+            data.setEstado("Pendiente autorización");
+
             LocalDate fecha = LocalDate.now();
             data.setFecha(fecha.toString());
 
             frame.getConexion().guardarSolicitud(data);
 
-            dispose();
+            setVisible(false);
         }
     }
 

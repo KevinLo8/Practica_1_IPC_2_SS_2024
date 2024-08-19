@@ -187,7 +187,7 @@ public class IF_Movimiento extends JInternalFrame {
 
         if (txf5.getText().length() == 7) {
             
-            data.setEstablecimiento(txf5.getText());
+            data.setEstablecimiento(txf5.getText().toUpperCase());
             completo++;
 
         } else {
@@ -205,7 +205,7 @@ public class IF_Movimiento extends JInternalFrame {
 
             frame.getConexion().guardarMovimiento(data);
 
-            dispose();
+            setVisible(false);
 
         }
 

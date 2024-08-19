@@ -8,7 +8,6 @@ import javax.swing.*;
 
 import com.practica_1.Backend.Datos.Data_Solicitud;
 import com.practica_1.Backend.Datos.Data_Tarjeta;
-import com.practica_1.Backend.Exception.SolicitudAutorizadaException;
 import com.practica_1.Backend.Listeners.FocusListenerCasillaPalabra;
 import com.practica_1.Frontend.Frame_principal;
 
@@ -50,7 +49,7 @@ public class IF_Autorizacion extends JInternalFrame {
         JButton btn1 = new JButton("Autorizar solicitud");
 
         txf1 = new JTextField();
-        txf1.setPreferredSize(new Dimension(200, 25));
+        txf1.setPreferredSize(new Dimension(250, 25));
         txf1.setHorizontalAlignment(JTextField.CENTER);
 
         //Se agregan los componentes al InternalFrame
@@ -59,7 +58,7 @@ public class IF_Autorizacion extends JInternalFrame {
 
         //Se agregan los componentes en sus respectivos espacios
         pnl1.add(lblf1, BorderLayout.NORTH);
-        pnl1.add(txf1);
+        pnl1.add(txf1, BorderLayout.CENTER);
         pnl1.add(lbl1, BorderLayout.SOUTH);
 
         pnl2.add(btn1);
@@ -80,56 +79,51 @@ public class IF_Autorizacion extends JInternalFrame {
     private void btnAutorizarActionPerformer(){
 
         try {
-           
+            //Se revisa si se ingreso un número
             int numero = Integer.valueOf(txf1.getText());
+            //Se revisa que el número ingresado se mayor a 0
             if (numero > 0) {
                 Data_Solicitud dataSolicitud = frame.getConexion().pedirSolicitud(numero);
+                //Se revisa que el número de solicitud ingresado exista
                 if (dataSolicitud != null) {
-                
-                    float sueldo = Float.parseFloat(dataSolicitud.getSalario());
-                    float credito = frame.getCalculador().sacarCredito(sueldo);
-                    float minimo = 0;
-
-                    switch (dataSolicitud.getTipo()) {
-                        case "NACIONAL":
-                            minimo = 5000;
-                            break;
-                        case "REGIONAL":
-                            minimo = 10000;
-                            break;
-                        case "INTERNACIONAL":
-                            minimo = 20000;
-                            break;
-                    }
-
-                    if (credito > minimo) {
-                        Data_Tarjeta data = new Data_Tarjeta();
-
-                        data.setNumeroSolicitud(numero);
-                        data.setTipo(dataSolicitud.getTipo());
-                        data.setLimite(credito);
-                        data.setEstado("Activada");
-
-                        LocalDate fecha = LocalDate.now();
-                        data.setFechaCambio(fecha);
-
-                        frame.getConexion().guardarTarjeta(data);
-
-                        dispose();
-
+                    //Se revisa que la solicitud no haya sido procesada
+                    if (dataSolicitud.getEstado().equals("Pendiente autorización")) {
+                        float sueldo = Float.parseFloat(dataSolicitud.getSalario());
+                        float credito = frame.getCalculador().sacarCredito(sueldo);
+                        float minimo = Data_Solicitud.retornarMinimo(dataSolicitud.getTipo());
+                        //Se revisa si se puede aprovar la solicitud
+                        if (credito > minimo) {
+                            Data_Tarjeta data = new Data_Tarjeta();
+    
+                            data.setNumeroSolicitud(numero);
+                            data.setTipo(dataSolicitud.getTipo());
+                            data.setLimite(credito);
+                            data.setEstado("Activada");
+    
+                            LocalDate fecha = LocalDate.now();
+                            data.setFechaCambio(fecha);
+    
+                            frame.getConexion().guardarTarjeta(data);
+                            frame.getConexion().cambiarEstadoSolicitud(txf1.getText(), "Aprobada");
+                            
+                            lbl1.setText("Solicitud autorizada con exito"); 
+    
+                        } else {
+                            lbl1.setText("Solicitud rechazada por salario bajo requisito mínimo");
+                            frame.getConexion().cambiarEstadoSolicitud(txf1.getText(), "Rechazada"); 
+                        }    
                     } else {
-                        lbl1.setText("Salario insuficiente para la autorizacion"); 
+                        lbl1.setText("Solicitud previamente procesada"); 
                     }
                 } else {
                     lbl1.setText("Numero de solicitud ingresado no existe");
                 }
-            }    
+            } else {
+                lbl1.setText("Ingrese un número mayor a 0");
+            }   
         } catch (NumberFormatException e) {
             lbl1.setText("Ingrese un numero de solicitud valido");
-        } catch (SolicitudAutorizadaException e) {
-            lbl1.setText("Solicitud selecionada ya esta autorizada");
-        } 
-
+        }
     }
 
     public void hacerVisible() {
