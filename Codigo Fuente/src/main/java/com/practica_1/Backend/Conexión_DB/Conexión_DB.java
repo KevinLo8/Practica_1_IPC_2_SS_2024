@@ -228,6 +228,7 @@ public class Conexión_DB {
                 data_Tarjeta.setLimite(resultSet.getFloat("limite"));
                 data_Tarjeta.setEstado(resultSet.getString("estado"));
                 data_Tarjeta.setNumeroSolicitud(resultSet.getInt("número_solicitud"));
+                data_Tarjeta.setFechaCambio(resultSet.getDate("fecha_cambio").toLocalDate());
 
                 return data_Tarjeta;
             } else {

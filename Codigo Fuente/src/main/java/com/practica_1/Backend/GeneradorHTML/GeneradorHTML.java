@@ -47,7 +47,7 @@ public class GeneradorHTML {
     }
 
     public static String ReporteEstadosTarjetaHTML(String stringHTML, int numero, Data_Tarjeta dataT, 
-                Data_Solicitud dataS, ResultSet dataM, Float monto, Float interes){
+                Data_Solicitud dataS, ResultSet resultSet, Float monto, Float interes){
 
         stringHTML = (stringHTML + "<FONT SIZE=5><p>" + "Estado de targeta No. " + String.valueOf(numero) + "</p></font>");
         stringHTML = (stringHTML + "<p>NÚMERO DE TARJETA:  " + dataT.getNumero() + "</p>");
@@ -55,7 +55,7 @@ public class GeneradorHTML {
         stringHTML = (stringHTML + "<p>NOMBRE DE TITULAR:  " + dataS.getNombre() + "</p>");
         stringHTML = (stringHTML + "<p>DIRECCIÓN DE TITULAR:  " + dataS.getDireccion() + "</p>");
 
-        stringHTML = (stringHTML + "<table><tr><th>FECHA</th>");
+        stringHTML = (stringHTML + "<table border=\"1\"><tr><th>FECHA</th>");
         stringHTML = (stringHTML + "<th>TIPO DE MOVIMIENTO</th>");
         stringHTML = (stringHTML + "<th>DESCRIPCIÓN</th>");
         stringHTML = (stringHTML + "<th>ESTABLECIMIENTO</th>");
@@ -63,13 +63,12 @@ public class GeneradorHTML {
 
 
         try {
-            dataM.first();
-            while (dataM.next()) {
-                stringHTML = (stringHTML + "<tr><th>" + dataM.getDate("fecha").toString() + "</th>");
-                stringHTML = (stringHTML + "<th>" + dataM.getString("tipo") + "</th>");
-                stringHTML = (stringHTML + "<th>" + dataM.getString("descripción") + "</th>");
-                stringHTML = (stringHTML + "<th>" + dataM.getString("establecimiento") + "</th>");
-                stringHTML = (stringHTML + "<th>" + dataM.getString("monto") + "</th></tr>");
+            while (resultSet.next()) {
+                stringHTML = (stringHTML + "<tr><th>" + resultSet.getDate("fecha").toString() + "</th>");
+                stringHTML = (stringHTML + "<th>" + resultSet.getString("tipo") + "</th>");
+                stringHTML = (stringHTML + "<th>" + resultSet.getString("descripción") + "</th>");
+                stringHTML = (stringHTML + "<th>" + resultSet.getString("establecimiento") + "</th>");
+                stringHTML = (stringHTML + "<th>" + resultSet.getString("monto") + "</th></tr>");
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -106,7 +105,7 @@ public class GeneradorHTML {
 
         stringHTML = (stringHTML + "<FONT SIZE=5><p>Lista de tarjetas</p></font>");
 
-        stringHTML = (stringHTML + "<table><tr><th>NÚMERO DE TARJETA</th>");
+        stringHTML = (stringHTML + "<table border=\"1\"><tr><th>NÚMERO DE TARJETA</th>");
         stringHTML = (stringHTML + "<th>TIPO</th>");
         stringHTML = (stringHTML + "<th>lÍMITE</th>");
         stringHTML = (stringHTML + "<th>NOMBRE</th>");
@@ -124,8 +123,8 @@ public class GeneradorHTML {
         stringHTML = (stringHTML + "<th>" + dataT.getTipo() + "</th>");
         stringHTML = (stringHTML + "<th>" + dataT.getLimite().toString() + "</th>");
         stringHTML = (stringHTML + "<th>" + dataS.getNombre() + "</th>");
-        stringHTML = (stringHTML + "<th>" + dataS.getDireccion() + "</th></tr>");
-        stringHTML = (stringHTML + "<th>" + dataT.getFechaCambio().toString() + "</th></tr>");
+        stringHTML = (stringHTML + "<th>" + dataS.getDireccion() + "</th>");
+        stringHTML = (stringHTML + "<th>" + dataT.getFechaCambio().toString() + "</th>");
         stringHTML = (stringHTML + "<th>" + dataT.getEstado() + "</th></tr>");
 
         return stringHTML;

@@ -35,7 +35,7 @@ public class JMI_ReporteTarjetas extends JMenuItem {
 
         ResultSet dataTarjetas = frame.getConexion().pedirTarjetas();
 
-        String nombre = "Reporte_de_listado_de_tarjetas_No.";
+        String nombre = "Reporte_de_listado_de_tarjetas_No_";
         String path = frame.getConfig().getDirecciónSalida();
         nombre = ConexionArchivo.GenerarNombre(path, nombre);
 

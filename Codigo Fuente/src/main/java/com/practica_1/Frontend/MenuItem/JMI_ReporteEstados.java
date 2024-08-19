@@ -36,7 +36,7 @@ public class JMI_ReporteEstados extends JMenuItem {
 
         ResultSet dataTarjetas = frame.getConexion().pedirTarjetas();
 
-        String nombre = "Reporte_de_estado_de_cuentas_No.";
+        String nombre = "Reporte_de_estado_de_cuentas_No_";
         String path = frame.getConfig().getDirecciónSalida();
         nombre = ConexionArchivo.GenerarNombre(path, nombre);
 

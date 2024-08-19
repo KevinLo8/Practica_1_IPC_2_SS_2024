@@ -29,10 +29,10 @@ public class ConexionArchivo {
 
         do {
             numero++;
-            String pathName = path + "/" + nombre + String.valueOf(numero);
+            String pathName = path + "/" + nombre + String.valueOf(numero) + ".html";
             file = new File(pathName);
         } while (file.exists());
 
-        return nombre + String.valueOf(numero);
+        return nombre + String.valueOf(numero) + ".html";
     }
 }

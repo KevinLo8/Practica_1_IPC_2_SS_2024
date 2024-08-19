@@ -5,13 +5,7 @@ import javax.swing.*;
 import com.practica_1.Backend.Calculador_Cuentas.Calculador_Cuentas;
 import com.practica_1.Backend.Conexión_DB.Conexión_DB;
 import com.practica_1.Backend.Datos.Data_Config;
-import com.practica_1.Frontend.MenuItem.JMI_Ajustes;
-import com.practica_1.Frontend.MenuItem.JMI_Autorizacion;
-import com.practica_1.Frontend.MenuItem.JMI_Cancelacion;
-import com.practica_1.Frontend.MenuItem.JMI_Consulta;
-import com.practica_1.Frontend.MenuItem.JMI_Movimiento;
-import com.practica_1.Frontend.MenuItem.JMI_Salir;
-import com.practica_1.Frontend.MenuItem.JMI_Solicitud;
+import com.practica_1.Frontend.MenuItem.*;
 
 import java.awt.*;
 
@@ -83,8 +77,8 @@ public class Frame_principal extends JFrame {
         JMI_Autorizacion itemAc4 = new JMI_Autorizacion(this);
         JMI_Cancelacion itemAc5 = new JMI_Cancelacion(this);
 
-        JMenuItem itemR1 = new JMenuItem("Solicitud Nueva");
-        JMenuItem itemR2 = new JMenuItem("Insertar Movimiento");
+        JMI_ReporteEstados itemR1 = new JMI_ReporteEstados(this);
+        JMI_ReporteTarjetas itemR2 = new JMI_ReporteTarjetas(this);
         JMenuItem itemR3 = new JMenuItem("Consultar Tarjeta");
 
         //Se arma la barra de menú
