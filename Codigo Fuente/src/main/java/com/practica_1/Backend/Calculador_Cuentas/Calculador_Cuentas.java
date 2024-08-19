@@ -2,6 +2,8 @@ package com.practica_1.Backend.Calculador_Cuentas;
 
 import java.sql.*;
 
+import com.practica_1.Backend.Datos.Data_Tarjeta;
+
 public class Calculador_Cuentas {
 
     public float sacarCredito(float in) {
@@ -15,7 +17,7 @@ public class Calculador_Cuentas {
         return out;
     }
 
-    public boolean tieneSaldoPendiente(ResultSet resultSet) throws SQLException {
+    public Float SaldoPendiente(ResultSet resultSet) throws SQLException {
 
         float saldo = 0;
 
@@ -26,12 +28,30 @@ public class Calculador_Cuentas {
                 saldo -= resultSet.getFloat("Monto");
             }
         }
-
         if (saldo > 0) {
-            return true;
+            return saldo;
         } else {
-            return false;
+            return (float) 0;
         }
 
+    }
+
+    public Float calculoIntereses(Float saldo, Data_Tarjeta data_Tarjeta) {
+
+        Double intereses = 0.0;
+
+        switch (data_Tarjeta.getTipo()) {
+            case "NACIONAL":
+                  intereses = saldo * 0.012;  
+                break;
+            case "REGIONAL":
+                intereses = saldo * 0.023;  
+                break;
+            case "INTERNACIONAL":
+                intereses = saldo * 0.0375;  
+                break;
+        }
+
+        return intereses.floatValue();
     }
 }

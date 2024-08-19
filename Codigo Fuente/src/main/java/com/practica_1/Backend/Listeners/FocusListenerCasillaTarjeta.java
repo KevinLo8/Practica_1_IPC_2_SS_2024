@@ -23,19 +23,21 @@ public class FocusListenerCasillaTarjeta implements FocusListener {
 
     @Override
     public void focusLost(FocusEvent e) {
-        try {
-            Data_Tarjeta.revisarNumero(txf.getText());
-            if (txf.getText().length() == 16) {
-                String numero = Data_Tarjeta.convertirNumero(txf.getText());
-                txf.setText(numero);
-            } if (txf.getText().length() == 19) {
-                String numero = Data_Tarjeta.chequearNumero(txf.getText());
-                txf.setText(numero);
-            } else {
-                lbl.setText("Tamaño de número no valido");
+        if (txf.getText().length() > 0) {
+            try {
+                Data_Tarjeta.revisarNumero(txf.getText());
+                if (txf.getText().length() == 16) {
+                    String numero = Data_Tarjeta.convertirNumero(txf.getText());
+                    txf.setText(numero);
+                } if (txf.getText().length() == 19) {
+                    String numero = Data_Tarjeta.chequearNumero(txf.getText());
+                    txf.setText(numero);
+                } else {
+                    lbl.setText("Tamaño de número no valido");
+                }
+            } catch (NumberFormatException ex) {
+                lbl.setText("Inserte un numero de tarjeta valido");
             }
-        } catch (NumberFormatException ex) {
-            lbl.setText("Inserte un numero de tarjeta valido");
         }
     }
 

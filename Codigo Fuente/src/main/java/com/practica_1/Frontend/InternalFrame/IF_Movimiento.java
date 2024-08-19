@@ -36,6 +36,9 @@ public class IF_Movimiento extends JInternalFrame {
 
     private void initComponentes(){
 
+        //Se configura el InternalFrame
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
+
         //Se inician los componentes del InternalFrame
         JPanel pnl1 = new JPanel();
         JPanel pnl2 = new JPanel();
@@ -210,9 +213,13 @@ public class IF_Movimiento extends JInternalFrame {
 
     public void hacerVisible() {
 
-        if (!isVisible()) {
-            setVisible(true);
-        }
+        setVisible(true);
+        txf1.setText("");
+        txf2.setText("");
+        txf3.setText("");
+        txf4.setText("");
+        txf5.setText("");
+        txf6.setText("");
 
     }
 

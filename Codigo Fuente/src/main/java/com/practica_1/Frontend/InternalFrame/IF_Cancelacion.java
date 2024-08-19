@@ -2,7 +2,6 @@ package com.practica_1.Frontend.InternalFrame;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.beans.PropertyVetoException;
 import java.sql.ResultSet;
 
 import javax.swing.*;
@@ -82,7 +81,7 @@ public class IF_Cancelacion extends JInternalFrame {
             if (lbl1.getText().equals(" ")) {
                 if (frame.getConexion().estaActivaTarjeta(txf1.getText())) {
                     ResultSet resultset = frame.getConexion().pedirMovimientos(txf1.getText());
-                    if (!frame.getCalculador().tieneSaldoPendiente(resultset)) {
+                    if (frame.getCalculador().SaldoPendiente(resultset) == 0) {
                         frame2();
                     } else {
                         lbl1.setText("Tarjeta con saldo pendiente, no se puede cancelar");
@@ -101,6 +100,7 @@ public class IF_Cancelacion extends JInternalFrame {
         //se vuelve visible el InternalFrame si ni lo es
         setVisible(true);
         frame1();
+        txf1.setText(" ");
 
     }
     

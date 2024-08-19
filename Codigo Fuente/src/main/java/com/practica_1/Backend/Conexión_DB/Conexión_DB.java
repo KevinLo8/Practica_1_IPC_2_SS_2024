@@ -1,6 +1,7 @@
 package com.practica_1.Backend.Conexión_DB;
 
 import java.sql.*;
+import java.time.LocalDate;
 
 import com.practica_1.Backend.Datos.Data_Movimiento;
 import com.practica_1.Backend.Datos.Data_Solicitud;
@@ -100,6 +101,22 @@ public class Conexión_DB {
 
     }
 
+    public ResultSet pedirSolicitudes() {
+
+        try {
+            
+            String select = "SELECT * FROM solicitud;";
+            Statement statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(select);
+
+            return resultSet;
+
+        } catch (SQLException e) {
+            return null;
+        }
+
+    }
+
     public void guardarTarjeta(Data_Tarjeta data) throws SolicitudAutorizadaException {
 
         String numero;
@@ -131,10 +148,10 @@ public class Conexión_DB {
 
         data.setNumero(numero);
 
-        String insert = "INSERT INTO tarjeta (número, tipo, limite, estado, número_solicitud) "
+        String insert = "INSERT INTO tarjeta (número, tipo, limite, estado, número_solicitud, fecha_autorización) "
                 + "values('" + data.getNumero() + "','" + data.getTipo().toString() + "','" 
                 + data.getLimite() + "','" + data.getEstado() + "','" 
-                + String.valueOf(data.getNumeroSolicitud()) + "')";
+                + String.valueOf(data.getNumeroSolicitud()) + "','" + data.getFechaAutorizacion() + "')";
 
         insertData(insert);
 
@@ -223,6 +240,22 @@ public class Conexión_DB {
 
     }
 
+    public ResultSet pedirTarjetas() {
+
+        try {
+            
+            String select = "SELECT * FROM tarjeta;";
+            Statement statementInsert = connection.createStatement();
+            ResultSet resultSet = statementInsert.executeQuery(select);
+
+            return resultSet;
+
+        } catch (SQLException e) {
+            return null;
+        }
+
+    }
+
     public ResultSet pedirMovimientos(String numero) {
 
         try {
@@ -240,8 +273,10 @@ public class Conexión_DB {
     } 
 
     public void cambiarEstadoCuenta(String numero){
+
+        LocalDate fecha = LocalDate.now();
             
-        String select = "UPDATE tarjeta set estado = 'Cancelada' where número = '" + numero + "';";
+        String select = "UPDATE tarjeta set estado = 'Cancelada', fecha_cancelación = '" + fecha.toString() + "'' where número = '" + numero + "';";
         insertData(select);
 
     }

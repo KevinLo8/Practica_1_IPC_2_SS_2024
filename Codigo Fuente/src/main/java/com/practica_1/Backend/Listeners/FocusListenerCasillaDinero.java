@@ -26,17 +26,19 @@ public class FocusListenerCasillaDinero implements FocusListener {
             @Override
             public void focusLost(FocusEvent e) {
 
-                try {
+                if (txf.getText().length() > 0) {
+                    try {
 
-                    Float numero = Float.parseFloat(txf.getText());
-                    DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.GERMAN);
-                    dfs.setDecimalSeparator('.');
-                    DecimalFormat df = new DecimalFormat("#.00",dfs);
-                    txf.setText(df.format(numero));
-    
-                } catch (NumberFormatException ex) {
-                    txf.setText("0.00");
-                    lbl.setText("Ingrese un número valido");
+                        Float numero = Float.parseFloat(txf.getText());
+                        DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.GERMAN);
+                        dfs.setDecimalSeparator('.');
+                        DecimalFormat df = new DecimalFormat("#.00",dfs);
+                        txf.setText(df.format(numero));
+        
+                    } catch (NumberFormatException ex) {
+                        txf.setText("");
+                        lbl.setText("Ingrese un número valido");
+                    }      
                 }
 
             }
