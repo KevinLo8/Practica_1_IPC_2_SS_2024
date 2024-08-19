@@ -6,7 +6,6 @@ import java.time.LocalDate;
 import com.practica_1.Backend.Datos.Data_Movimiento;
 import com.practica_1.Backend.Datos.Data_Solicitud;
 import com.practica_1.Backend.Datos.Data_Tarjeta;
-import com.practica_1.Backend.Exception.SolicitudAutorizadaException;
 
 public class Conexión_DB {
 
@@ -117,7 +116,7 @@ public class Conexión_DB {
 
     }
 
-    public void guardarTarjeta(Data_Tarjeta data) throws SolicitudAutorizadaException {
+    public void guardarTarjeta(Data_Tarjeta data) {
 
         String numero;
 
@@ -277,7 +276,16 @@ public class Conexión_DB {
 
         LocalDate fecha = LocalDate.now();
             
-        String select = "UPDATE tarjeta set estado = 'Cancelada', fecha_cambio = '" + fecha.toString() + "'' where número = '" + numero + "';";
+        String select = "UPDATE tarjeta SET estado = 'Cancelada', fecha_cambio = '" + fecha.toString() + "'' where número = '" + numero + "';";
+        insertData(select);
+
+    }
+
+    public void cambiarEstadoSolicitud(String numero, String estado){
+
+        LocalDate fecha = LocalDate.now();
+            
+        String select = "UPDATE solicitud SET estado = '" + estado + " " + fecha.toString() + "' where número = '" + numero + "';";
         insertData(select);
 
     }

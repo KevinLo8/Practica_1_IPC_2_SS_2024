@@ -116,8 +116,7 @@ public class GeneradorHTML {
         return stringHTML;
     }
 
-    public static String ReporteTarjetasCuerpoHTML(String stringHTML, Data_Tarjeta dataT, 
-        Data_Solicitud dataS){
+    public static String ReporteTarjetasCuerpoHTML(String stringHTML, Data_Tarjeta dataT, Data_Solicitud dataS){
 
         stringHTML = (stringHTML + "<tr><th>" + dataT.getNumero() + "</th>");
         stringHTML = (stringHTML + "<th>" + dataT.getTipo() + "</th>");
@@ -131,6 +130,52 @@ public class GeneradorHTML {
     }
 
     public static String ReporteTarjetasFinalHTML(String stringHTML){
+
+        stringHTML = (stringHTML + "</table>");
+
+        stringHTML = (stringHTML + "</body>");
+        stringHTML = (stringHTML + "</html>");
+
+        return stringHTML;
+    }
+
+    public static String ReporteSolicitudInicioHTML(){
+
+        String stringHTML = null;
+
+        stringHTML = ("<html>");
+        stringHTML = (stringHTML + "<head>");
+        stringHTML = (stringHTML + "<title>Lista de solicitudes</title>");
+        stringHTML = (stringHTML + "</head>");
+        stringHTML = (stringHTML + "<body>");
+
+        stringHTML = (stringHTML + "<FONT SIZE=5><p>Lista de solicitudes</p></font>");
+
+        stringHTML = (stringHTML + "<table border=\"1\"><tr><th>NÚMERO DE SOLICITUD</th>");
+        stringHTML = (stringHTML + "<th>FECHA</th>");
+        stringHTML = (stringHTML + "<th>TIPO</th>");
+        stringHTML = (stringHTML + "<th>NOMBRE</th>");
+        stringHTML = (stringHTML + "<th>SALARIO</th>");
+        stringHTML = (stringHTML + "<th>DIRECCIÓN</th>");
+        stringHTML = (stringHTML + "<th>ESTADO</th></tr>");
+
+        return stringHTML;
+    }
+
+    public static String ReporteSolicitudCuerpoHTML(String stringHTML, Data_Solicitud dataS){
+
+        stringHTML = (stringHTML + "<tr><th>" + dataS.getNumero() + "</th>");
+        stringHTML = (stringHTML + "<th>" + dataS.getFecha().toString() + "</th>");
+        stringHTML = (stringHTML + "<th>" + dataS.getTipo() + "</th>");
+        stringHTML = (stringHTML + "<th>" + dataS.getNombre() + "</th>");
+        stringHTML = (stringHTML + "<th>" + dataS.getSalario().toString() + "</th>");
+        stringHTML = (stringHTML + "<th>" + dataS.getDireccion() + "</th>");
+        stringHTML = (stringHTML + "<th>" + dataS.getEstado() + "</th></tr>");
+
+        return stringHTML;
+    }
+
+    public static String ReporteSolicitudFinalHTML(String stringHTML){
 
         stringHTML = (stringHTML + "</table>");
 
