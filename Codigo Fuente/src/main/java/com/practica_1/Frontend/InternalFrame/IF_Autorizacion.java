@@ -111,7 +111,7 @@ public class IF_Autorizacion extends JInternalFrame {
                         data.setEstado("Activada");
 
                         LocalDate fecha = LocalDate.now();
-                        data.setFechaAutorizacion(fecha);
+                        data.setFechaCambio(fecha);
 
                         frame.getConexion().guardarTarjeta(data);
 

@@ -8,61 +8,51 @@ import java.sql.SQLException;
 import javax.swing.*;
 
 import com.practica_1.Backend.ConexiónArchivo.ConexionArchivo;
-import com.practica_1.Backend.Datos.Data_Solicitud;
-import com.practica_1.Backend.Datos.Data_Tarjeta;
+import com.practica_1.Backend.Datos.*;
 import com.practica_1.Backend.Exception.ArchivoExistenteException;
 import com.practica_1.Backend.GeneradorHTML.GeneradorHTML;
 import com.practica_1.Frontend.Frame_principal;
 
-public class JMI_ReporteEstados extends JMenuItem {
+public class JMI_ReporteTarjetas extends JMenuItem {
 
     private Frame_principal frame;
 
-    public JMI_ReporteEstados(Frame_principal frame) {
+    public JMI_ReporteTarjetas(Frame_principal frame) {
         
-        super("Estado de cuentas");
+        super("Listado de tarjetas");
         this.frame = frame;
 
         addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                btnEstadosActionPerformer();
+                btnTarjetasActionPerformer();
             }
         });
 
     } 
 
-    private void btnEstadosActionPerformer() {
+    private void btnTarjetasActionPerformer() {
 
         ResultSet dataTarjetas = frame.getConexion().pedirTarjetas();
 
-        String nombre = "Reporte_de_estado_de_cuentas_No.";
+        String nombre = "Reporte_de_listado_de_tarjetas_No.";
         String path = frame.getConfig().getDirecciónSalida();
         nombre = ConexionArchivo.GenerarNombre(path, nombre);
 
-        String dataHTML = GeneradorHTML.ReporteEstadosInicioHTML();
-        int numero = 1;
+        String dataHTML = GeneradorHTML.ReporteTarjetasInicioHTML();
 
         try {
             while (dataTarjetas.next()) {
-                if (dataTarjetas.getString("estado").equals("Activada")) {
                     Data_Tarjeta dataT = frame.getConexion().pedirTarjeta(dataTarjetas.getString("número"));
                     Data_Solicitud dataS = frame.getConexion().pedirSolicitud(dataT.getNumeroSolicitud());
-                    ResultSet dataM = frame.getConexion().pedirMovimientos(dataT.getNumero());
 
-                    float monto = frame.getCalculador().SaldoPendiente(dataM);
-                    float intereses = frame.getCalculador().calculoIntereses(monto, dataT);
-
-                    dataHTML = GeneradorHTML.ReporteEstadosTarjetaHTML(dataHTML, numero, dataT, dataS, dataM, monto, intereses);
-
-                    numero++;
-                }
+                    dataHTML = GeneradorHTML.ReporteTarjetasCuerpoHTML(dataHTML, dataT, dataS);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
 
-        dataHTML = GeneradorHTML.ReporteEstadosFinalHTML(dataHTML);
+        dataHTML = GeneradorHTML.ReporteTarjetasFinalHTML(dataHTML);
 
         try {
             ConexionArchivo.guardarArchivo(path, dataHTML, nombre);

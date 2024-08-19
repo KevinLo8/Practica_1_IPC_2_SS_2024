@@ -77,11 +77,11 @@ public class GeneradorHTML {
 
         Float saldo = monto + interes;
 
+        stringHTML = (stringHTML + "</table>");
+
         stringHTML = (stringHTML + "<p>MONTO TOTAL:  " + monto.toString() + "</p>");
         stringHTML = (stringHTML + "<p>INTERESES:  " + interes.toString() + "</p>");
         stringHTML = (stringHTML + "<p>SALDO TOTAL:  " + saldo.toString() + "</p>");
-
-        stringHTML = (stringHTML + "</table>");
 
         return stringHTML;
     }
@@ -94,5 +94,51 @@ public class GeneradorHTML {
         return stringHTML;
     }
 
+    public static String ReporteTarjetasInicioHTML(){
+
+        String stringHTML = null;
+
+        stringHTML = ("<html>");
+        stringHTML = (stringHTML + "<head>");
+        stringHTML = (stringHTML + "<title>Lista de tarjetas</title>");
+        stringHTML = (stringHTML + "</head>");
+        stringHTML = (stringHTML + "<body>");
+
+        stringHTML = (stringHTML + "<FONT SIZE=5><p>Lista de tarjetas</p></font>");
+
+        stringHTML = (stringHTML + "<table><tr><th>NÚMERO DE TARJETA</th>");
+        stringHTML = (stringHTML + "<th>TIPO</th>");
+        stringHTML = (stringHTML + "<th>lÍMITE</th>");
+        stringHTML = (stringHTML + "<th>NOMBRE</th>");
+        stringHTML = (stringHTML + "<th>DIRECCIÓN</th>");
+        stringHTML = (stringHTML + "<th>FECHA</th>");
+        stringHTML = (stringHTML + "<th>ESTADO</th></tr>");
+
+        return stringHTML;
+    }
+
+    public static String ReporteTarjetasCuerpoHTML(String stringHTML, Data_Tarjeta dataT, 
+        Data_Solicitud dataS){
+
+        stringHTML = (stringHTML + "<tr><th>" + dataT.getNumero() + "</th>");
+        stringHTML = (stringHTML + "<th>" + dataT.getTipo() + "</th>");
+        stringHTML = (stringHTML + "<th>" + dataT.getLimite().toString() + "</th>");
+        stringHTML = (stringHTML + "<th>" + dataS.getNombre() + "</th>");
+        stringHTML = (stringHTML + "<th>" + dataS.getDireccion() + "</th></tr>");
+        stringHTML = (stringHTML + "<th>" + dataT.getFechaCambio().toString() + "</th></tr>");
+        stringHTML = (stringHTML + "<th>" + dataT.getEstado() + "</th></tr>");
+
+        return stringHTML;
+    }
+
+    public static String ReporteTarjetasFinalHTML(String stringHTML){
+
+        stringHTML = (stringHTML + "</table>");
+
+        stringHTML = (stringHTML + "</body>");
+        stringHTML = (stringHTML + "</html>");
+
+        return stringHTML;
+    }
 
 }
