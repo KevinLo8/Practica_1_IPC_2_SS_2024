@@ -210,7 +210,7 @@ public class IF_Movimiento extends JInternalFrame {
 
     public void hacerVisible() {
 
-        if (!isClosed()) {
+        if (!isVisible()) {
             setVisible(true);
         }
 

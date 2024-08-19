@@ -2,6 +2,7 @@ package com.practica_1.Frontend.InternalFrame;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.beans.PropertyVetoException;
 import java.sql.ResultSet;
 
 import javax.swing.*;
@@ -31,6 +32,9 @@ public class IF_Cancelacion extends JInternalFrame {
     }
 
     private void initComponentes(){
+
+        //Se configura el InternalFrame
+        setDefaultCloseOperation(HIDE_ON_CLOSE);
 
         //Se inician los paneles a usar
         pnl1 = new JPanel();
@@ -95,10 +99,8 @@ public class IF_Cancelacion extends JInternalFrame {
     public void hacerVisible() {
 
         //se vuelve visible el InternalFrame si ni lo es
-        if (!isClosed()) {
-            setVisible(true);
-            frame1();
-        }
+        setVisible(true);
+        frame1();
 
     }
     

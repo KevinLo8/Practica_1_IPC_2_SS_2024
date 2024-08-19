@@ -106,7 +106,7 @@ public class IF_Consulta extends JInternalFrame {
 
     public void hacerVisible() {
 
-        if (!isClosed()) {
+        if (!isVisible()) {
             setVisible(true);
         }
 

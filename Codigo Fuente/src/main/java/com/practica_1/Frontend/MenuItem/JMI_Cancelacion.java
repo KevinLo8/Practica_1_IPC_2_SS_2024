@@ -15,14 +15,14 @@ public class JMI_Cancelacion extends JMenuItem {
         
         super("Cancelar Tarjeta");
 
-        frameCancelacion = new IF_Cancelacion(frame);  
+        frameCancelacion = new IF_Cancelacion(frame);
+        frame.getDesktop().add(frameCancelacion);  
 
         addActionListener(new ActionListener() {
 
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                frame.getDesktop().add(frameCancelacion);
                 frameCancelacion.hacerVisible();
 
             }

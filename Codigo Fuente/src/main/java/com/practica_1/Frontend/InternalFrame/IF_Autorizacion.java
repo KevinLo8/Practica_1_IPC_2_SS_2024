@@ -127,9 +127,7 @@ public class IF_Autorizacion extends JInternalFrame {
 
     public void hacerVisible() {
 
-        if (!isClosed()) {
-            setVisible(true);
-        }
+        setVisible(true);
 
     }
 

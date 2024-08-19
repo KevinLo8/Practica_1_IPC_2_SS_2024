@@ -151,7 +151,7 @@ public class IF_Solicitud extends JInternalFrame {
 
     public void hacerVisible() {
 
-        if (!isClosed()) {
+        if (!isVisible()) {
             setVisible(true);
         }
 
