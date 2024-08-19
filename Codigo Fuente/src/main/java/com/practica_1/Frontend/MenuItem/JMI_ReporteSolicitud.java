@@ -12,13 +12,13 @@ import com.practica_1.Backend.Exception.ArchivoExistenteException;
 import com.practica_1.Backend.GeneradorHTML.GeneradorHTML;
 import com.practica_1.Frontend.Frame_principal;
 
-public class JMI_ReporteSolcitud extends JMenuItem {
+public class JMI_ReporteSolicitud extends JMenuItem {
 
     private Frame_principal frame;
 
-    public JMI_ReporteSolcitud(Frame_principal frame) {
+    public JMI_ReporteSolicitud(Frame_principal frame) {
         
-        super("Listado de tarjetas");
+        super("Listado de Solicitudes");
         this.frame = frame;
 
         addActionListener(new ActionListener() {

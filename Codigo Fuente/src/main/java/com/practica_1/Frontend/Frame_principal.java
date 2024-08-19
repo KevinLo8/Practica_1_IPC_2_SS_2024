@@ -79,7 +79,7 @@ public class Frame_principal extends JFrame {
 
         JMI_ReporteEstados itemR1 = new JMI_ReporteEstados(this);
         JMI_ReporteTarjetas itemR2 = new JMI_ReporteTarjetas(this);
-        JMenuItem itemR3 = new JMenuItem("Consultar Tarjeta");
+        JMI_ReporteSolicitud itemR3 = new JMI_ReporteSolicitud(this);
 
         //Se arma la barra de menú
         jM1.add(itemA1);

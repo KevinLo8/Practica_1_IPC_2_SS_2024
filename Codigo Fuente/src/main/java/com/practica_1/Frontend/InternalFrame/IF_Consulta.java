@@ -110,7 +110,7 @@ public class IF_Consulta extends JInternalFrame {
     public void hacerVisible() {
 
         setVisible(true);
-        txf1.setText(" ");
+        txf1.setText("");
     }
 
 }

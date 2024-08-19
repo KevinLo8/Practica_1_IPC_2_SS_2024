@@ -7,6 +7,7 @@ import java.sql.SQLException;
 
 import javax.swing.*;
 
+import com.practica_1.Backend.Calculador_Cuentas.Calculador_Cuentas;
 import com.practica_1.Backend.ConexiónArchivo.ConexionArchivo;
 import com.practica_1.Backend.Datos.Data_Solicitud;
 import com.practica_1.Backend.Datos.Data_Tarjeta;
@@ -51,7 +52,7 @@ public class JMI_ReporteEstados extends JMenuItem {
                     ResultSet dataM = frame.getConexion().pedirMovimientos(dataT.getNumero());
 
                     float monto = frame.getCalculador().SaldoPendiente(dataM);
-                    float intereses = frame.getCalculador().calculoIntereses(monto, dataT);
+                    float intereses = Calculador_Cuentas.acortarFloat(frame.getCalculador().calculoIntereses(monto, dataT));
 
                     dataHTML = GeneradorHTML.ReporteEstadosTarjetaHTML(dataHTML, numero, dataT, dataS, dataM, monto, intereses);
 

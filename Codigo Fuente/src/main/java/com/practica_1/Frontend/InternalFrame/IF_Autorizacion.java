@@ -49,7 +49,7 @@ public class IF_Autorizacion extends JInternalFrame {
         JButton btn1 = new JButton("Autorizar solicitud");
 
         txf1 = new JTextField();
-        txf1.setPreferredSize(new Dimension(200, 25));
+        txf1.setPreferredSize(new Dimension(250, 25));
         txf1.setHorizontalAlignment(JTextField.CENTER);
 
         //Se agregan los componentes al InternalFrame
@@ -58,7 +58,7 @@ public class IF_Autorizacion extends JInternalFrame {
 
         //Se agregan los componentes en sus respectivos espacios
         pnl1.add(lblf1, BorderLayout.NORTH);
-        pnl1.add(txf1);
+        pnl1.add(txf1, BorderLayout.CENTER);
         pnl1.add(lbl1, BorderLayout.SOUTH);
 
         pnl2.add(btn1);
@@ -106,14 +106,14 @@ public class IF_Autorizacion extends JInternalFrame {
                             frame.getConexion().guardarTarjeta(data);
                             frame.getConexion().cambiarEstadoSolicitud(txf1.getText(), "Aprobada");
                             
-                            dispose();
+                            lbl1.setText("Solicitud autorizada con exito"); 
     
                         } else {
-                            lbl1.setText("Solicitud rechazada por requerimiento de salario");
+                            lbl1.setText("Solicitud rechazada por salario bajo requisito mínimo");
                             frame.getConexion().cambiarEstadoSolicitud(txf1.getText(), "Rechazada"); 
                         }    
                     } else {
-                        lbl1.setText("Solicitud ya procesada"); 
+                        lbl1.setText("Solicitud previamente procesada"); 
                     }
                 } else {
                     lbl1.setText("Numero de solicitud ingresado no existe");

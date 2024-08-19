@@ -153,7 +153,7 @@ public class IF_Solicitud extends JInternalFrame {
 
             frame.getConexion().guardarSolicitud(data);
 
-            dispose();
+            setVisible(false);
         }
     }
 

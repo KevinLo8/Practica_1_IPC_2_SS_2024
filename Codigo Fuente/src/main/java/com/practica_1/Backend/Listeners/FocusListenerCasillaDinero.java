@@ -1,11 +1,10 @@
 package com.practica_1.Backend.Listeners;
 
 import java.awt.event.*;
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Locale;
 
 import javax.swing.*;
+
+import com.practica_1.Backend.Calculador_Cuentas.Calculador_Cuentas;
 
 public class FocusListenerCasillaDinero implements FocusListener {
 
@@ -29,11 +28,8 @@ public class FocusListenerCasillaDinero implements FocusListener {
                 if (txf.getText().length() > 0) {
                     try {
 
-                        Float numero = Float.parseFloat(txf.getText());
-                        DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.GERMAN);
-                        dfs.setDecimalSeparator('.');
-                        DecimalFormat df = new DecimalFormat("#.00",dfs);
-                        txf.setText(df.format(numero));
+                        Float numero = Calculador_Cuentas.acortarFloat(Float.parseFloat(txf.getText()));
+                        txf.setText(numero.toString());
         
                     } catch (NumberFormatException ex) {
                         txf.setText("");

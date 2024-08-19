@@ -30,10 +30,10 @@ public class Conexión_DB {
 
         int numeroSolicitud = siguienteNumero("solicitud");
 
-        String insert = "INSERT INTO solicitud (número, fecha, tipo, nombre, salario, dirección) "
+        String insert = "INSERT INTO solicitud (número, fecha, tipo, nombre, salario, dirección, estado) "
                 + "values('" + numeroSolicitud + "','" + data.getFecha() + "','" 
                 + data.getTipo() + "','" + data.getNombre() + "','" 
-                + data.getSalario() + "','" + data.getDireccion() + "');";
+                + data.getSalario() + "','" + data.getDireccion() + "','" + data.getEstado() + "');";
 
         insertData(insert);
                 
@@ -82,12 +82,14 @@ public class Conexión_DB {
 
             if (resultSet.next()) {
 
+                data_Solicitud.setNumero(resultSet.getInt("número"));
                 data_Solicitud.setNombre(resultSet.getString("nombre"));
                 data_Solicitud.setDireccion(resultSet.getString("dirección"));
                 Float num = resultSet.getFloat("salario");
                 data_Solicitud.setSalario(num.toString());
                 data_Solicitud.setTipo(resultSet.getString("tipo"));
                 data_Solicitud.setFecha(resultSet.getDate("fecha").toString());
+                data_Solicitud.setEstado(resultSet.getString("estado"));
 
                 return data_Solicitud;
             } else {

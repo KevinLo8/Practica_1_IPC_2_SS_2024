@@ -1,6 +1,8 @@
 package com.practica_1.Backend.Calculador_Cuentas;
 
 import java.sql.*;
+import java.text.*;
+import java.util.Locale;
 
 import com.practica_1.Backend.Datos.Data_Tarjeta;
 
@@ -53,5 +55,15 @@ public class Calculador_Cuentas {
         }
 
         return intereses.floatValue();
+    }
+
+    public static Float acortarFloat(Float numeroIn) {
+
+        DecimalFormatSymbols dfs = new DecimalFormatSymbols(Locale.GERMAN);
+        dfs.setDecimalSeparator('.');
+        DecimalFormat df = new DecimalFormat("#.00",dfs);
+        Float numeroOut = Float.valueOf(df.format(numeroIn));
+
+        return numeroOut;
     }
 }
