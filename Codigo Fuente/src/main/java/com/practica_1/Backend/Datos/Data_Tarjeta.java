@@ -6,10 +6,10 @@ public class Data_Tarjeta {
 
     private String numero;
     private String tipo;
-    private float limite;
+    private Float limite;
     private String estado;
     private int numeroSolicitud;
-    private LocalDate fechaAutorizacion;
+    private LocalDate fechaCambio;
     
     public String getNumero() {
         return numero;
@@ -23,10 +23,10 @@ public class Data_Tarjeta {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    public float getLimite() {
+    public Float getLimite() {
         return limite;
     }
-    public void setLimite(float limite) {
+    public void setLimite(Float limite) {
         this.limite = limite;
     }
     public String getEstado() {
@@ -41,11 +41,11 @@ public class Data_Tarjeta {
     public void setNumeroSolicitud(int numeroSolicitud) {
         this.numeroSolicitud = numeroSolicitud;
     }
-    public LocalDate getFechaAutorizacion() {
-        return fechaAutorizacion;
+    public LocalDate getFechaCambio() {
+        return fechaCambio;
     }
-    public void setFechaAutorizacion(LocalDate fechaAutorizacion) {
-        this.fechaAutorizacion = fechaAutorizacion;
+    public void setFechaCambio(LocalDate fechaAutorizacion) {
+        this.fechaCambio = fechaAutorizacion;
     }
 
     public static String convertirNumero(String numeroIn) throws NumberFormatException {

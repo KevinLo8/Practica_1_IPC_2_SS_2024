@@ -100,7 +100,7 @@ public class IF_Cancelacion extends JInternalFrame {
         //se vuelve visible el InternalFrame si ni lo es
         setVisible(true);
         frame1();
-        txf1.setText(" ");
+        txf1.setText("");
 
     }
     

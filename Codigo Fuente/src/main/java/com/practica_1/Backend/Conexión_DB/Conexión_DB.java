@@ -148,10 +148,10 @@ public class Conexión_DB {
 
         data.setNumero(numero);
 
-        String insert = "INSERT INTO tarjeta (número, tipo, limite, estado, número_solicitud, fecha_autorización) "
+        String insert = "INSERT INTO tarjeta (número, tipo, limite, estado, número_solicitud, fecha_cambio) "
                 + "values('" + data.getNumero() + "','" + data.getTipo().toString() + "','" 
                 + data.getLimite() + "','" + data.getEstado() + "','" 
-                + String.valueOf(data.getNumeroSolicitud()) + "','" + data.getFechaAutorizacion() + "')";
+                + String.valueOf(data.getNumeroSolicitud()) + "','" + data.getFechaCambio() + "')";
 
         insertData(insert);
 
@@ -228,6 +228,7 @@ public class Conexión_DB {
                 data_Tarjeta.setLimite(resultSet.getFloat("limite"));
                 data_Tarjeta.setEstado(resultSet.getString("estado"));
                 data_Tarjeta.setNumeroSolicitud(resultSet.getInt("número_solicitud"));
+                data_Tarjeta.setFechaCambio(resultSet.getDate("fecha_cambio").toLocalDate());
 
                 return data_Tarjeta;
             } else {
@@ -276,7 +277,7 @@ public class Conexión_DB {
 
         LocalDate fecha = LocalDate.now();
             
-        String select = "UPDATE tarjeta set estado = 'Cancelada', fecha_cancelación = '" + fecha.toString() + "'' where número = '" + numero + "';";
+        String select = "UPDATE tarjeta set estado = 'Cancelada', fecha_cambio = '" + fecha.toString() + "'' where número = '" + numero + "';";
         insertData(select);
 
     }
