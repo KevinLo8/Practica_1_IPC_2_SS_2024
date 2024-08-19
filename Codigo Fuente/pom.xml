@@ -20,6 +20,8 @@
             <groupId>com.mysql</groupId>
             <artifactId>mysql-connector-j</artifactId>
             <version>9.0.0</version>
+            <scope>system</scope>
+            <systemPath>/usr/share/java/mysql-connector-j-9.0.0.jar</systemPath>
         </dependency>
     </dependencies>
 

@@ -17,14 +17,10 @@ public class Conexión_DB {
 
     public Conexión_DB(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(URL_MYSQL, USER, PASSWORD);
             connection.setSchema("CONTROL_BANCO");
             System.out.println("Esquema: " + connection.getSchema());
         } catch (SQLException ex) {
-            System.out.println("error al conectar a la DB");
-            ex.printStackTrace();
-        } catch (ClassNotFoundException ex) {
             System.out.println("error al conectar a la DB");
             ex.printStackTrace();
         }
